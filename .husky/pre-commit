@@ -27,10 +27,10 @@ if [ "${DISABLE_PRE_COMMIT_FORMAT:-false}" != "true" ]; then
   xargs -0 -r git add -- < "$STAGED_FILES_FILE"
 fi
 
-# # Lint
-# if [ "${DISABLE_PRE_COMMIT_LINT:-false}" != "true" ]; then
-#   pnpm lint:fix
+# Lint
+if [ "${DISABLE_PRE_COMMIT_LINT:-false}" != "true" ]; then
+  pnpm lint:fix
 
-#   # Re-add only previously staged files (if they still exist)
-#   xargs -0 -r git add -- < "$STAGED_FILES_FILE"
-# fi
+  # Re-add only previously staged files (if they still exist)
+  xargs -0 -r git add -- < "$STAGED_FILES_FILE"
+fi
