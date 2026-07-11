@@ -1,8 +1,8 @@
-import type { H3Event } from 'h3'
+import type { H3Event } from "h3";
 
-import { SECURITY_HEADERS } from '@constants'
+import { SECURITY_HEADERS } from "@constants";
 
-import { hasMatchingRequestToken } from './token'
+import { hasMatchingRequestToken } from "./token";
 
 /**
  * Checks whether the incoming request should be treated as admin.
@@ -15,9 +15,9 @@ import { hasMatchingRequestToken } from './token'
  * @returns Whether request contains a valid admin token.
  */
 export function isAdmin(event: H3Event): boolean {
-	return hasMatchingRequestToken(
-		event,
-		useRuntimeConfig(event).apiToken,
-		SECURITY_HEADERS.adminToken
-	)
+  return hasMatchingRequestToken(
+    event,
+    useRuntimeConfig(event).apiToken,
+    SECURITY_HEADERS.adminToken
+  );
 }

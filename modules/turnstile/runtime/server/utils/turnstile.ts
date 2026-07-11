@@ -1,10 +1,10 @@
-import type { H3Event } from 'h3'
-import type { TurnstileErrorCode, TurnstileErrorData } from '../../types/errors'
+import type { H3Event } from "h3";
+import type { TurnstileErrorCode, TurnstileErrorData } from "../../types/errors";
 
-import * as Sentry from '@sentry/nuxt'
-import { isAdmin } from '~~/server/utils/security/admin'
+import * as Sentry from "@sentry/nuxt";
+import { isAdmin } from "~~/server/utils/security/admin";
 
-import { TURNSTILE_TOKEN_HEADER } from '../../constants'
+import { TURNSTILE_TOKEN_HEADER } from "../../constants";
 
 /**
  * Validates the Turnstile token sent with a protected request.
@@ -17,81 +17,81 @@ import { TURNSTILE_TOKEN_HEADER } from '../../constants'
  * @returns Nothing when token is valid.
  */
 export async function assertTurnstileToken(event: H3Event, expectedAction: string): Promise<void> {
-	if (isAdmin(event)) {
-		return
-	}
+  if (isAdmin(event)) {
+    return;
+  }
 
-	const config = useRuntimeConfig(event)
-	const secretKey = config.turnstile?.secretKey?.trim()
-	const isProd = Boolean(config.public?.mode?.isProd)
+  const config = useRuntimeConfig(event);
+  const secretKey = config.turnstile?.secretKey?.trim();
+  const isProd = Boolean(config.public?.mode?.isProd);
 
-	if (!secretKey) {
-		if (isProd) {
-			throw createTurnstileError(
-				500,
-				'TURNSTILE_SECRET_KEY is missing in runtimeConfig',
-				'TURNSTILE_SERVER_MISCONFIGURED',
-				expectedAction
-			)
-		}
+  if (!secretKey) {
+    if (isProd) {
+      throw createTurnstileError(
+        500,
+        "TURNSTILE_SECRET_KEY is missing in runtimeConfig",
+        "TURNSTILE_SERVER_MISCONFIGURED",
+        expectedAction
+      );
+    }
 
-		return
-	}
+    return;
+  }
 
-	const token = getRequestHeader(event, TURNSTILE_TOKEN_HEADER)?.trim()
-	if (!token) {
-		throw createTurnstileError(400, 'Turnstile token is missing', 'TURNSTILE_TOKEN_MISSING')
-	}
+  const token = getRequestHeader(event, TURNSTILE_TOKEN_HEADER)?.trim();
+  if (!token) {
+    throw createTurnstileError(400, "Turnstile token is missing", "TURNSTILE_TOKEN_MISSING");
+  }
 
-	let verification: { success: boolean; action?: string }
-	try {
-		verification = await verifyTurnstileToken(token, event)
-	} catch (error: unknown) {
-		if (isErrorWithStatusCode(error)) {
-			throw error
-		}
+  let verification: { success: boolean; action?: string };
+  try {
+    verification = await verifyTurnstileToken(token, event);
+  } catch (error: unknown) {
+    if (isErrorWithStatusCode(error)) {
+      throw error;
+    }
 
-		Sentry.withScope((scope) => {
-			scope.setLevel('error')
-			scope.setTag('area', 'security')
-			scope.setTag('kind', 'turnstile_verification_transport_failure')
-			scope.setContext('turnstile_verification', {
-				expectedAction,
-				path: getRequestURL(event).pathname
-			})
+    Sentry.withScope((scope) => {
+      scope.setLevel("error");
+      scope.setTag("area", "security");
+      scope.setTag("kind", "turnstile_verification_transport_failure");
+      scope.setContext("turnstile_verification", {
+        expectedAction,
+        path: getRequestURL(event).pathname
+      });
 
-			if (error instanceof Error) {
-				Sentry.captureException(error)
-				return
-			}
+      if (error instanceof Error) {
+        Sentry.captureException(error);
+        return;
+      }
 
-			Sentry.captureMessage('Turnstile validation transport failure with non-Error exception')
-		})
+      Sentry.captureMessage("Turnstile validation transport failure with non-Error exception");
+    });
 
-		throw createError({
-			statusCode: 502,
-			statusMessage: 'Turnstile validation could not be performed',
-			data: createTurnstileErrorData('TURNSTILE_VALIDATION_UNAVAILABLE', expectedAction)
-		})
-	}
+    throw createError({
+      statusCode: 502,
+      statusMessage: "Turnstile validation could not be performed",
+      data: createTurnstileErrorData("TURNSTILE_VALIDATION_UNAVAILABLE", expectedAction)
+    });
+  }
 
-	if (!verification.success) {
-		throw createTurnstileError(
-			403,
-			'Turnstile validation failed',
-			'TURNSTILE_VALIDATION_FAILED',
-			expectedAction
-		)
-	}
+  if (!verification.success) {
+    throw createTurnstileError(
+      403,
+      "Turnstile validation failed",
+      "TURNSTILE_VALIDATION_FAILED",
+      expectedAction
+    );
+  }
 
-	if (verification.action && verification.action !== expectedAction) {
-		throw createTurnstileError(
-			403,
-			'Turnstile action does not match',
-			'TURNSTILE_ACTION_MISMATCH',
-			expectedAction
-		)
-	}
+  if (verification.action && verification.action !== expectedAction) {
+    throw createTurnstileError(
+      403,
+      "Turnstile action does not match",
+      "TURNSTILE_ACTION_MISMATCH",
+      expectedAction
+    );
+  }
 }
 
 /**
@@ -104,16 +104,16 @@ export async function assertTurnstileToken(event: H3Event, expectedAction: strin
  * @returns H3 error carrying the normalized Turnstile payload.
  */
 export function createTurnstileError(
-	statusCode: number,
-	statusMessage: string,
-	code: TurnstileErrorCode,
-	expectedAction?: string
+  statusCode: number,
+  statusMessage: string,
+  code: TurnstileErrorCode,
+  expectedAction?: string
 ): Error {
-	return createError({
-		statusCode,
-		statusMessage,
-		data: createTurnstileErrorData(code, expectedAction)
-	})
+  return createError({
+    statusCode,
+    statusMessage,
+    data: createTurnstileErrorData(code, expectedAction)
+  });
 }
 
 /**
@@ -124,17 +124,17 @@ export function createTurnstileError(
  * @returns Serializable error payload.
  */
 export function createTurnstileErrorData(
-	code: TurnstileErrorCode,
-	expectedAction?: string
+  code: TurnstileErrorCode,
+  expectedAction?: string
 ): TurnstileErrorData {
-	if (expectedAction) {
-		return {
-			code,
-			expectedAction
-		}
-	}
+  if (expectedAction) {
+    return {
+      code,
+      expectedAction
+    };
+  }
 
-	return { code }
+  return { code };
 }
 
 /**
@@ -144,10 +144,10 @@ export function createTurnstileErrorData(
  * @returns Whether the value is a status-code carrying error.
  */
 export function isErrorWithStatusCode(error: unknown): error is { statusCode: number } {
-	return Boolean(
-		error &&
-		typeof error === 'object' &&
-		'statusCode' in error &&
-		typeof (error as { statusCode?: unknown }).statusCode === 'number'
-	)
+  return Boolean(
+    error &&
+    typeof error === "object" &&
+    "statusCode" in error &&
+    typeof (error as { statusCode?: unknown }).statusCode === "number"
+  );
 }

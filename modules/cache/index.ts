@@ -1,14 +1,11 @@
-import type {
-  ModuleOptions,
-  ResolvedModuleOptions,
-} from "./runtime/types/options";
+import type { ModuleOptions, ResolvedModuleOptions } from "./runtime/types/options";
 import { moduleSetup, usePrepareMode } from "@config/modules";
 import {
   addServerScanDir,
   addTypeTemplate,
   createResolver,
   defineNuxtModule,
-  useLogger,
+  useLogger
 } from "@nuxt/kit";
 import { defu } from "defu";
 import { ENV } from "varlock/env";
@@ -18,7 +15,7 @@ const MODULE_KEY = "cache";
 const LOG_SCOPE = "cache";
 
 const DEFAULTS: Partial<ModuleOptions> = {
-  enabled: true,
+  enabled: true
 };
 
 /**
@@ -34,8 +31,8 @@ export default defineNuxtModule<ModuleOptions>({
     name: MODULE_NAME,
     configKey: MODULE_KEY,
     compatibility: {
-      nuxt: "^3.0.0 || ^4.0.0",
-    },
+      nuxt: "^3.0.0 || ^4.0.0"
+    }
   },
   defaults: DEFAULTS,
   setup(userOptions, nuxt) {
@@ -43,13 +40,7 @@ export default defineNuxtModule<ModuleOptions>({
     const { isPrepareMode } = usePrepareMode(nuxt);
 
     const { start, end, isEnabled, options, checkAndGetApiToken } =
-      moduleSetup<ResolvedModuleOptions>(
-        MODULE_NAME,
-        MODULE_KEY,
-        userOptions,
-        DEFAULTS,
-        log,
-      );
+      moduleSetup<ResolvedModuleOptions>(MODULE_NAME, MODULE_KEY, userOptions, DEFAULTS, log);
 
     start();
 
@@ -60,7 +51,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Set options to runtimeConfig for runtime access
     nuxt.options.runtimeConfig.cache = {
-      apiToken: ENV.API_TOKEN,
+      apiToken: ENV.API_TOKEN
     };
 
     const resolver = createResolver(import.meta.url);
@@ -77,10 +68,10 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.nitro = defu(
         {
           experimental: {
-            asyncContext: true,
-          },
+            asyncContext: true
+          }
         },
-        nuxt.options.nitro ?? {},
+        nuxt.options.nitro ?? {}
       );
     }
 
@@ -88,14 +79,11 @@ export default defineNuxtModule<ModuleOptions>({
     addServerScanDir(`${runtimeDir}/server`);
     addTypeTemplate({
       filename: "types/cache-config.d.ts",
-      src: resolver.resolve(runtimeDir, "types/config.d.ts"),
+      src: resolver.resolve(runtimeDir, "types/config.d.ts")
     });
     addTypeTemplate({
       filename: "types/cache-runtime-config-shape.d.ts",
-      src: resolver.resolve(
-        runtimeDir,
-        "types/cache-runtime-config-shape.d.ts",
-      ),
+      src: resolver.resolve(runtimeDir, "types/cache-runtime-config-shape.d.ts")
     });
 
     nuxt.options.routeRules = nuxt.options.routeRules ?? {};
@@ -103,9 +91,9 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.routeRules["/api/_cache/**"] = {
       ...(nuxt.options.routeRules["/api/_cache/**"] || {}),
       cache: false,
-      prerender: false,
+      prerender: false
     };
 
     end();
-  },
+  }
 });

@@ -4,5 +4,4 @@ export interface ModuleOptions {
   apiToken?: string;
 }
 
-export type ResolvedModuleOptions = Required<Pick<ModuleOptions, "enabled">> &
-  ModuleOptions;
+export type ResolvedModuleOptions = Required<Pick<ModuleOptions, "enabled">> & ModuleOptions;

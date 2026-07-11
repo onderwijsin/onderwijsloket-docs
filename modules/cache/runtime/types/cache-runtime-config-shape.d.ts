@@ -1,8 +1,4 @@
-import type {
-  CacheMap,
-  CloudflareModuleOptions,
-  ModuleOptions,
-} from "./options";
+import type { CacheMap, CloudflareModuleOptions, ModuleOptions } from "./options";
 
 export interface CacheRuntimeConfigShape {
   cache: {

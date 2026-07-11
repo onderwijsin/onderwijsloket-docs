@@ -26,8 +26,7 @@ export function resolveEnvironment(value: string | undefined) {
   const isProd = environment === "production";
   const isPreview = environment === "preview";
   const isDev = environment === "development";
-  const isTest =
-    ENV.VITEST === true || ENV.NODE_ENV === "test" || ENV.NUXT_TEST === true;
+  const isTest = ENV.VITEST === true || ENV.NODE_ENV === "test" || ENV.NUXT_TEST === true;
 
   return {
     environment,
@@ -35,7 +34,7 @@ export function resolveEnvironment(value: string | undefined) {
     isProd,
     isPreview,
     isDev,
-    isTest,
+    isTest
   };
 }
 
@@ -50,10 +49,8 @@ export function resolveTurnstile(environment: Environment) {
   const isDevelopment = environment === "development";
 
   const turnstileSiteKey =
-    ENV.TURNSTILE_SITE_KEY ??
-    (isDevelopment ? "1x00000000000000000000BB" : undefined);
+    ENV.TURNSTILE_SITE_KEY ?? (isDevelopment ? "1x00000000000000000000BB" : undefined);
   const turnstileSecretKey =
-    ENV.TURNSTILE_SECRET_KEY ??
-    (isDevelopment ? "1x0000000000000000000000000000000AA" : undefined);
+    ENV.TURNSTILE_SECRET_KEY ?? (isDevelopment ? "1x0000000000000000000000000000000AA" : undefined);
   return { turnstileSiteKey, turnstileSecretKey };
 }

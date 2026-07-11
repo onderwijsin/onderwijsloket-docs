@@ -16,16 +16,16 @@ Keep `@nuxtjs/turnstile` in `modules`, then configure this local module through 
 key:
 
 ```ts
-import { ENV } from 'varlock/env'
+import { ENV } from "varlock/env";
 
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/turnstile', './modules/turnstile'],
+  modules: ["@nuxtjs/turnstile", "./modules/turnstile"],
   turnstile: {
     enabled: true,
-    siteKey: ENV.TURNSTILE_SITE_KEY ?? '',
-    secretKey: ENV.TURNSTILE_SECRET_KEY ?? ''
+    siteKey: ENV.TURNSTILE_SITE_KEY ?? "",
+    secretKey: ENV.TURNSTILE_SECRET_KEY ?? ""
   }
-})
+});
 ```
 
 The module mirrors that config into:

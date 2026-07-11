@@ -1,9 +1,9 @@
-declare module '@nuxt/schema' {
-	interface RuntimeConfig {
-		turnstile: {
-			secretKey: string
-		}
-	}
+declare module "@nuxt/schema" {
+  interface RuntimeConfig {
+    turnstile: {
+      secretKey: string;
+    };
+  }
 }
 
-export {}
+export {};

@@ -13,10 +13,10 @@ if [ -f "envs/.env.local" ]; then
   set +a
 fi
 
-# # Run typecheck unless explicitly disabled
-# if [ "${DISABLE_PRE_PUSH_TYPECHECK:-false}" != "true" ]; then
-#   pnpm typecheck
-# fi
+# Run typecheck unless explicitly disabled
+if [ "${DISABLE_PRE_PUSH_TYPECHECK:-false}" != "true" ]; then
+  pnpm typecheck
+fi
 
 # # Run lint unless explicitly disabled
 # if [ "${DISABLE_PRE_PUSH_LINT:-false}" != "true" ]; then

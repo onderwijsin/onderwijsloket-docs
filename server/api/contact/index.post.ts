@@ -9,15 +9,13 @@ import { z } from "zod";
 export default defineEventHandler(async (event) => {
   await assertTurnstileToken(event, TURNSTILE_ACTIONS.contact);
 
-  const body = await readValidatedBody(event, (body) =>
-    contactSubmissionSchema.safeParse(body),
-  );
+  const body = await readValidatedBody(event, (body) => contactSubmissionSchema.safeParse(body));
 
   if (!body.success) {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid data",
-      data: z.treeifyError(body.error),
+      data: z.treeifyError(body.error)
     });
   }
 
@@ -25,10 +23,10 @@ export default defineEventHandler(async (event) => {
 
   await submitContactToDirectus(body.data, {
     directusBaseUrl: config.directus?.baseUrl,
-    publicToken: config.directus?.publicToken,
+    publicToken: config.directus?.publicToken
   });
 
   return useApiResponse({
-    success: true,
+    success: true
   });
 });

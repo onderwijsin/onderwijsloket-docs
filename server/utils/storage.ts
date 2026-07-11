@@ -1,8 +1,6 @@
 import type { Storage, StorageValue } from "unstorage";
 
-declare function useStorage<T extends StorageValue = StorageValue>(
-  _base?: string,
-): Storage<T>;
+declare function useStorage<T extends StorageValue = StorageValue>(_base?: string): Storage<T>;
 
 /**
  * Normalizes route/base/key fragments to storage segment format.
@@ -44,10 +42,7 @@ export function toStorageBaseKey(base: string, raw: string): string {
  * @param base - Optional logical base used to scope returned keys.
  * @returns Matching keys from the selected Nitro storage mount.
  */
-export async function getStorageKeys(
-  storageBase: string,
-  base?: string,
-): Promise<string[]> {
+export async function getStorageKeys(storageBase: string, base?: string): Promise<string[]> {
   const storage = useStorage(storageBase);
 
   if (!base) {
@@ -57,9 +52,7 @@ export async function getStorageKeys(
   const normalizedBase = normalizeStorageSegment(base);
   const prefix = `${normalizedBase}:`;
   const keys = await storage.getKeys();
-  return keys.filter(
-    (key: string) => key === normalizedBase || key.startsWith(prefix),
-  );
+  return keys.filter((key: string) => key === normalizedBase || key.startsWith(prefix));
 }
 
 /**
@@ -69,10 +62,7 @@ export async function getStorageKeys(
  * @param keys - Concrete mount-local keys to remove.
  * @returns Number of removed keys.
  */
-export async function deleteStorageKeys(
-  storageBase: string,
-  keys: string[],
-): Promise<number> {
+export async function deleteStorageKeys(storageBase: string, keys: string[]): Promise<number> {
   if (!keys.length) {
     return 0;
   }
@@ -89,10 +79,7 @@ export async function deleteStorageKeys(
  * @param base - Logical base prefix to clear from storage.
  * @returns Number of removed keys.
  */
-export async function clearStorageBase(
-  storageBase: string,
-  base: string,
-): Promise<number> {
+export async function clearStorageBase(storageBase: string, base: string): Promise<number> {
   const keys = await getStorageKeys(storageBase, base);
   return deleteStorageKeys(storageBase, keys);
 }
@@ -103,9 +90,7 @@ export async function clearStorageBase(
  * @param storageBase - Top-level Nitro storage mount name.
  * @returns Number of removed keys.
  */
-export async function clearEntireStorageBase(
-  storageBase: string,
-): Promise<number> {
+export async function clearEntireStorageBase(storageBase: string): Promise<number> {
   const storage = useStorage(storageBase);
   const keys = await storage.getKeys();
   return deleteStorageKeys(storageBase, keys);
@@ -122,7 +107,7 @@ export async function clearEntireStorageBase(
 export async function getStorageKeysByPath(
   storageBase: string,
   base: string,
-  path: string,
+  path: string
 ): Promise<string[]> {
   const storage = useStorage(storageBase);
   const keys = await getStorageKeys(storageBase, base);
@@ -131,8 +116,7 @@ export async function getStorageKeysByPath(
   const matches = await Promise.all(
     keys.map(async (key) => {
       const metadata = await storage.getMeta(key);
-      const metadataPath =
-        typeof metadata?.path === "string" ? metadata.path : null;
+      const metadataPath = typeof metadata?.path === "string" ? metadata.path : null;
 
       if (metadataPath && metadataPath.startsWith(normalizedPath)) {
         return key;
@@ -140,7 +124,7 @@ export async function getStorageKeysByPath(
 
       const normalizedKey = key.replace(/:/g, "/");
       return normalizedKey.includes(normalizedPath) ? key : null;
-    }),
+    })
   );
 
   return matches.filter((key): key is string => Boolean(key));

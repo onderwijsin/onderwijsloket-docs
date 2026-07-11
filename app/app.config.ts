@@ -5,18 +5,18 @@ export default defineAppConfig({
     // Default to package.json name
     title: "",
     // Default to package.json description
-    description: "",
+    description: ""
   },
   search: {
-    fts: true,
+    fts: true
   },
   socials: {
-    github: "https://github.com/onderwijsin",
+    github: "https://github.com/onderwijsin"
   },
   github: {
     url: "https://github.com/onderwijsin/onderwijsloket-docs",
     branch: "main",
-    rootDir: ".",
+    rootDir: "."
   },
   toc: {
     // Rename the title of the table of contents
@@ -29,16 +29,16 @@ export default defineAppConfig({
           icon: "lucide:github",
           label: "Code Examples",
           to: "https://github.com/onderwijsin/onderwijsloket-examples",
-          target: "_blank",
+          target: "_blank"
         },
         {
           icon: "lucide:code",
           label: "View Source Code",
           to: "https://github.com/onderwijsin/onderwijsloket-docs",
-          target: "_blank",
-        },
-      ],
-    },
+          target: "_blank"
+        }
+      ]
+    }
   },
   assistant: {
     // Show the floating input on documentation pages
@@ -52,13 +52,13 @@ export default defineAppConfig({
 
     // Keyboard shortcuts
     shortcuts: {
-      focusInput: "meta_i",
+      focusInput: "meta_i"
     },
 
     // Custom icons
     icons: {
       trigger: "i-lucide-sparkles",
-      explain: "i-lucide-brain",
-    },
-  },
+      explain: "i-lucide-brain"
+    }
+  }
 });

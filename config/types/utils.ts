@@ -32,8 +32,8 @@
  * ```
  */
 export type DeepPartial<T> = {
-	[P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
-}
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
 
 /**
  * Recursively makes all properties required, while preserving arrays
@@ -51,11 +51,11 @@ export type DeepPartial<T> = {
  * type Result = DeepRequired<Input>
  */
 export type DeepRequired<T> =
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-	T extends Function
-		? T // don't f*** with functions
-		: T extends (infer U)[]
-			? DeepRequired<U>[] // recurse into array elements
-			: T extends object
-				? { [P in keyof T]-?: DeepRequired<T[P]> }
-				: T
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  T extends Function
+    ? T // don't f*** with functions
+    : T extends (infer U)[]
+      ? DeepRequired<U>[] // recurse into array elements
+      : T extends object
+        ? { [P in keyof T]-?: DeepRequired<T[P]> }
+        : T;
