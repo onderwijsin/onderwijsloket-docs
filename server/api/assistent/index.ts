@@ -1,4 +1,9 @@
-import { streamText, convertToModelMessages, stepCountIs, smoothStream } from "ai";
+import {
+  streamText,
+  convertToModelMessages,
+  stepCountIs,
+  smoothStream,
+} from "ai";
 import type { ToolSet } from "ai";
 import { createMCPClient } from "@ai-sdk/mcp";
 import type { H3Event } from "h3";
@@ -65,6 +70,7 @@ function getSystemPrompt(siteName: string) {
 }
 
 export default defineEventHandler(async (event) => {
+  console.log("Handling request for assistant API");
   const { messages } = await readBody(event);
   const config = useRuntimeConfig();
   const siteConfig = getSiteConfig(event);
@@ -72,7 +78,8 @@ export default defineEventHandler(async (event) => {
   const siteName = siteConfig.name || "Documentation";
 
   const mcpServer = config.assistant.mcpServer;
-  const isExternalUrl = mcpServer.startsWith("http://") || mcpServer.startsWith("https://");
+  const isExternalUrl =
+    mcpServer.startsWith("http://") || mcpServer.startsWith("https://");
   const baseURL = config.app?.baseURL?.replace(/\/$/, "") || "";
 
   const mistral = createMistral({ apiKey: config.mistral.apiKey });
@@ -84,18 +91,18 @@ export default defineEventHandler(async (event) => {
   if (isExternalUrl) {
     transport = {
       type: "http",
-      url: mcpServer
+      url: mcpServer,
     };
   } else if (import.meta.dev) {
     transport = {
       type: "http",
-      url: `http://localhost:3000${baseURL}${mcpServer}`
+      url: `http://localhost:3000${baseURL}${mcpServer}`,
     };
   } else {
     transport = {
       type: "http",
       url: `${getRequestURL(event).origin}${baseURL}${mcpServer}`,
-      fetch: createLocalFetch(event)
+      fetch: createLocalFetch(event),
     };
   }
 
@@ -117,8 +124,8 @@ export default defineEventHandler(async (event) => {
     },
     providerOptions: {
       gateway: {
-        caching: "auto"
-      }
+        caching: "auto",
+      },
     },
     system: getSystemPrompt(siteName),
     messages: await convertToModelMessages(messages),
@@ -126,6 +133,6 @@ export default defineEventHandler(async (event) => {
     experimental_transform: smoothStream(),
     onFinish: closeMcp,
     onAbort: closeMcp,
-    onError: closeMcp
+    onError: closeMcp,
   }).toUIMessageStreamResponse();
 });

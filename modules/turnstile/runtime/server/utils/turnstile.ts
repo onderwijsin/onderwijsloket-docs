@@ -1,7 +1,6 @@
 import type { H3Event } from "h3";
 import type { TurnstileErrorCode, TurnstileErrorData } from "../../types/errors";
 
-import * as Sentry from "@sentry/nuxt";
 import { isAdmin } from "~~/server/utils/security/admin";
 
 import { TURNSTILE_TOKEN_HEADER } from "../../constants";
@@ -50,23 +49,6 @@ export async function assertTurnstileToken(event: H3Event, expectedAction: strin
     if (isErrorWithStatusCode(error)) {
       throw error;
     }
-
-    Sentry.withScope((scope) => {
-      scope.setLevel("error");
-      scope.setTag("area", "security");
-      scope.setTag("kind", "turnstile_verification_transport_failure");
-      scope.setContext("turnstile_verification", {
-        expectedAction,
-        path: getRequestURL(event).pathname
-      });
-
-      if (error instanceof Error) {
-        Sentry.captureException(error);
-        return;
-      }
-
-      Sentry.captureMessage("Turnstile validation transport failure with non-Error exception");
-    });
 
     throw createError({
       statusCode: 502,

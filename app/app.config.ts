@@ -3,10 +3,11 @@ export default defineAppConfig({
     // Default to `%s - ${site.name}`
     titleTemplate: "",
     // Default to package.json name
-    title: "",
+    title: "Onderwijsloket Docs",
     // Default to package.json description
     description: ""
   },
+
   search: {
     fts: true
   },
@@ -43,22 +44,21 @@ export default defineAppConfig({
   assistant: {
     // Show the floating input on documentation pages
     floatingInput: true,
-
     // Show the "Explain with AI" button in the sidebar
     explainWithAi: true,
-
     // FAQ questions to display when chat is empty
     faqQuestions: [],
-
     // Keyboard shortcuts
     shortcuts: {
       focusInput: "meta_i"
-    },
+    }
+  },
 
-    // Custom icons
-    icons: {
-      trigger: "i-lucide-sparkles",
-      explain: "i-lucide-brain"
+  ui: {
+    colors: {
+      primary: "pink",
+      secondary: "purple",
+      neutral: "zinc"
     }
   }
 });

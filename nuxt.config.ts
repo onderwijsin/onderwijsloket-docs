@@ -1,5 +1,4 @@
 import { fileURLToPath } from "node:url";
-
 import { varlockVitePlugin } from "@varlock/vite-integration";
 import { ENV } from "varlock/env";
 import { version } from "./package.json";
@@ -18,6 +17,35 @@ const appUrl = ENV.NUXT_PUBLIC_SITE_URL!;
 export default defineNuxtConfig({
   extends: ["docus"],
   modules: ["@scalar/nuxt", "@nuxtjs/turnstile", "@nuxtjs/plausible", "nuxt-schema-org"],
+
+  hooks: {
+    /**
+     * Docus registers its assistant endpoint with `addServerHandler`, which
+     * can take precedence over the application route at the same path.
+     * Remove only Docus's duplicate so the local implementation owns it.
+     */
+    "nitro:config"(nitroConfig) {
+      const assistantApiPath = "/api/assistent";
+
+      nitroConfig.handlers = nitroConfig.handlers?.filter(
+        (handler) =>
+          handler?.route !== assistantApiPath ||
+          !String(handler?.handler).includes("/docus/modules/assistant/")
+      );
+    },
+
+    /**
+     * Docus is an extended Nuxt layer, so Nuxt includes its runtime source in
+     * the generated typecheck project. Keep application typechecking enabled
+     * while excluding diagnostics owned by the external Docus dependency.
+     */
+    "prepare:types"({ tsConfig }) {
+      tsConfig.include = tsConfig.include?.filter(
+        (entry) =>
+          !entry.includes("/node_modules/.pnpm/docus@") && !entry.includes("/node_modules/docus/")
+      );
+    }
+  },
 
   alias: {
     "@config": fileURLToPath(new URL("./config", import.meta.url)),
@@ -39,7 +67,13 @@ export default defineNuxtConfig({
 
   vite: {
     optimizeDeps: {
-      include: ["@plausible-analytics/tracker", "@vue/devtools-core", "@vue/devtools-kit", "zod"]
+      include: [
+        "@plausible-analytics/tracker",
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "zod",
+        "@unhead/schema-org/vue"
+      ]
     },
     plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })]
   },
@@ -87,6 +121,13 @@ export default defineNuxtConfig({
     trailingSlash: false
   },
 
+  docus: {
+    assistant: {
+      // API endpoint path
+      apiPath: "/api/assistent"
+    }
+  },
+
   mcp: {
     version
   },
@@ -113,12 +154,6 @@ export default defineNuxtConfig({
         }
       }
     ]
-  },
-
-  ui: {
-    experimental: {
-      componentDetection: true
-    }
   },
 
   turnstile: {
