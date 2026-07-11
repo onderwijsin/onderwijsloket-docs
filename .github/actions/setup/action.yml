@@ -1,0 +1,36 @@
+name: Setup
+description: "Setup Node.js, pnpm, Proton Pass and install dependencies"
+
+inputs:
+  node-version:
+    description: Node.js version
+    required: false
+    default: "24"
+  proton-pass-personal-access-token:
+    description: "Proton Pass personal access token for accessing sensitive environment variables"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v6
+      # Uses pnpm version from package.json if not specified
+      with:
+        run_install: false
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: pnpm
+
+    - name: Install Proton Pass CLI
+      uses: ./.github/actions/install-pass-cli
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+      env:
+        HUSKY: "0"
+        PROTON_PASS_PERSONAL_ACCESS_TOKEN: ${{ inputs.proton-pass-personal-access-token }}

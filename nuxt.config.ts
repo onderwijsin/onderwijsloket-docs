@@ -1,0 +1,203 @@
+import { fileURLToPath } from "node:url";
+
+import { varlockVitePlugin } from "@varlock/vite-integration";
+import { ENV } from "varlock/env";
+import { version } from "./package.json";
+import { resolveEnvironment, resolveTurnstile } from "./config/helpers";
+import { app } from "./config/head";
+import identity, { siteDescription, siteTitle } from "./config/identity";
+
+// Runtime environments
+const { environment, isDebug, isProd, isPreview, isDev, isTest } =
+  resolveEnvironment(ENV.MODE);
+
+// Resolve Turnstile keys
+const { turnstileSiteKey, turnstileSecretKey } = resolveTurnstile(environment);
+
+const appUrl = ENV.NUXT_PUBLIC_SITE_URL!;
+
+export default defineNuxtConfig({
+  extends: ["docus"],
+  modules: ["@scalar/nuxt", "@nuxtjs/turnstile", "@nuxtjs/plausible"],
+
+  alias: {
+    "@config": fileURLToPath(new URL("./config", import.meta.url)),
+    "@schema": fileURLToPath(new URL("./schema", import.meta.url)),
+    "@constants": fileURLToPath(new URL("./config/constants", import.meta.url)),
+  },
+
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false,
+    },
+  ],
+
+  app: {
+    keepalive: true,
+    head: app.head,
+  },
+
+  vite: {
+    optimizeDeps: {
+      include: [
+        "@plausible-analytics/tracker",
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "zod",
+      ],
+    },
+    plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })],
+  },
+
+  nitro: {
+    experimental: {
+      asyncContext: true,
+    },
+    minify: !isDebug,
+    prerender: {
+      autoSubfolderIndex: true,
+      crawlLinks: true,
+      failOnError: true,
+      ignore: ["/dev"],
+    },
+  },
+
+  debug: {
+    nitro: isDebug,
+    hydration: isDebug || isDev || isPreview,
+    watchers: isDebug || isDev,
+    router: isDebug,
+    templates: isDebug,
+    modules: isDebug,
+    hooks: {
+      server: isDebug,
+      client: isDebug,
+    },
+  },
+
+  $development: {
+    routeRules: {
+      "/**": { cache: false },
+    },
+  },
+
+  site: {
+    name: siteTitle,
+    description: siteDescription,
+    url: appUrl,
+    titleSeparator: "|",
+    defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed
+    language: "en_US",
+    indexable: isProd && ENV.DISABLE_INDEXING !== true,
+    trailingSlash: false,
+  },
+
+  mcp: {
+    version,
+  },
+
+  schemaOrg: {
+    identity: isTest ? undefined : identity,
+  },
+
+  robots: {
+    groups: [
+      {
+        userAgent: "*",
+        allow: "/",
+        contentUsage: {
+          bots: "y",
+          "train-ai": "n",
+          "ai-output": "y",
+          search: "y",
+        },
+        contentSignal: {
+          search: "yes",
+          "ai-input": "yes",
+          "ai-train": "no",
+        },
+      },
+    ],
+  },
+
+  ui: {
+    experimental: {
+      componentDetection: true,
+    },
+  },
+
+  turnstile: {
+    siteKey: turnstileSiteKey,
+    secretKey: turnstileSecretKey,
+  },
+
+  plausible: {
+    domain: ENV.PLAUSIBLE_DOMAIN || (appUrl ? new URL(appUrl).host : undefined),
+    // https://github.com/nuxt-modules/plausible?tab=readme-ov-file#proxy-configuration
+    proxy: true,
+    proxyBaseEndpoint: "/api/_plausible",
+    ignoredHostnames: ["localhost"],
+    autoPageviews: true,
+    autoOutboundTracking: true,
+  },
+
+  scalar: {
+    darkMode: true,
+    hideModels: false,
+    metaData: {
+      title: siteTitle,
+    },
+    // proxyUrl: 'https://proxy.scalar.com',
+    searchHotKey: "k",
+    showSidebar: true,
+    pathRouting: {
+      basePath: "/explorer",
+    },
+    url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml",
+  },
+
+  healthcheck: {
+    // TODO add mistral health check
+    cache: {
+      threshold: {
+        warn: 50,
+        error: 200,
+      },
+    },
+    directus: {
+      threshold: {
+        warn: 200,
+        error: 1000,
+      },
+    },
+  },
+
+  runtimeConfig: {
+    apiToken: ENV.API_TOKEN,
+    mailchimp: {
+      apiKey: ENV.MAILCHIMP_API_KEY,
+      listId: ENV.MAILCHIMP_LIST,
+      server: ENV.MAILCHIMP_SERVER,
+    },
+    directus: {
+      baseUrl: ENV.DIRECTUS_URL,
+      publicToken: ENV.DIRECTUS_PUBLIC_TOKEN,
+    },
+    public: {
+      siteUrl: appUrl,
+      siteName: siteTitle,
+      titleSeparator: "|",
+      mode: {
+        isDev,
+        isProd,
+        isPreview,
+        isDebug,
+        value: environment,
+      },
+      tracking: {
+        disabled: ENV.DISABLE_TRACKING === true,
+      },
+    },
+  },
+});

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Get list of staged files (Added, Copied, Modified) as NUL-delimited data
+# so filenames with spaces are handled correctly.
+STAGED_FILES_FILE="$(mktemp)"
+trap 'rm -f "$STAGED_FILES_FILE"' EXIT
+git diff --cached --name-only --diff-filter=ACM -z > "$STAGED_FILES_FILE"
+
+# Load tracked development defaults used by local hooks.
+# .env.local takes precedence over .env.development for duplicate keys
+if [ -f "envs/.env.development" ]; then
+  set -a
+  . "envs/.env.development"
+  set +a
+fi
+if [ -f "envs/.env.local" ]; then
+  set -a
+  . "envs/.env.local"
+  set +a
+fi
+
+# # Format
+# if [ "${DISABLE_PRE_COMMIT_FORMAT:-false}" != "true" ]; then
+#   pnpm format:fix
+
+#   # Re-add only previously staged files (if they still exist)
+#   xargs -0 -r git add -- < "$STAGED_FILES_FILE"
+# fi
+
+# # Lint
+# if [ "${DISABLE_PRE_COMMIT_LINT:-false}" != "true" ]; then
+#   pnpm lint:fix
+
+#   # Re-add only previously staged files (if they still exist)
+#   xargs -0 -r git add -- < "$STAGED_FILES_FILE"
+# fi
