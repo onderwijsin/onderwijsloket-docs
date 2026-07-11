@@ -44,6 +44,9 @@ catalog:
   vue-tsc: 3.3.7
   zod: 4.4.3
 
+patchedDependencies:
+  web-worker@1.5.0: patches/web-worker@1.5.0.patch
+
 catalogMode: "strict"
 cleanupUnusedCatalogs: true
 onlyBuiltDependencies:

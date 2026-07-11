@@ -118,6 +118,9 @@ catalogs:
       specifier: 4.4.3
       version: 4.4.3
 
+patchedDependencies:
+  web-worker@1.5.0: 859cc5fa70f7b2f4f2150f192c460ed4750088378cad4c9b8dafafa0e2b4df2c
+
 importers:
 
   .:
@@ -16014,7 +16017,7 @@ snapshots:
     dependencies:
       p-event: 6.0.1
       type-fest: 4.41.0
-      web-worker: 1.5.0
+      web-worker: 1.5.0(patch_hash=859cc5fa70f7b2f4f2150f192c460ed4750088378cad4c9b8dafafa0e2b4df2c)
 
   markdown-exit@1.0.0-beta.9:
     dependencies:
@@ -19223,7 +19226,7 @@ snapshots:
 
   web-namespaces@2.0.1: {}
 
-  web-worker@1.5.0: {}
+  web-worker@1.5.0(patch_hash=859cc5fa70f7b2f4f2150f192c460ed4750088378cad4c9b8dafafa0e2b4df2c): {}
 
   webidl-conversions@3.0.1: {}
 

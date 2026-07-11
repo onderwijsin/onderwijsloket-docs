@@ -167,11 +167,13 @@ export default defineNuxtConfig({
     metaData: {
       title: siteTitle
     },
-    // proxyUrl: 'https://proxy.scalar.com',
     searchHotKey: "k",
     showSidebar: true,
     pathRouting: {
       basePath: "/explorer"
+    },
+    agent: {
+      disabled: true
     },
     url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml"
   },
