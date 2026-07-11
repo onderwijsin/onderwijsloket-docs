@@ -14,7 +14,9 @@
     "env:typegen": "varlock typegen",
     "nuxt:prepare": "nuxt prepare",
     "prepare": "husky || true && pnpm nuxt:prepare",
-    "typecheck": "pnpm env:typegen && nuxi typecheck"
+    "typecheck": "pnpm env:typegen && nuxi typecheck",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
   },
   "varlock": {
     "loadPath": "./envs/"
@@ -54,6 +56,7 @@
     "@types/cloudflare-turnstile": "catalog:",
     "consola": "catalog:",
     "husky": "catalog:",
+    "oxfmt": "catalog:",
     "semantic-release": "catalog:"
   },
   "packageManager": "pnpm@11.11.0"
