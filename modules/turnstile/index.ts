@@ -58,7 +58,7 @@ export default defineNuxtModule<ModuleOptions>({
     const secretKey = options.secretKey ?? "";
     nuxt.options.build.transpile.push(runtimeDir);
     nuxt.options.runtimeConfig.turnstile = defu(
-      nuxt.options.runtimeConfig.turnstile,
+      nuxt.options.runtimeConfig.turnstile ?? {},
       {
         secretKey,
       },

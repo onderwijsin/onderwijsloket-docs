@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
 
   await submitContactToDirectus(body.data, {
     directusBaseUrl: config.directus?.baseUrl,
-    publicToken: config.public?.directus?.publicToken,
+    publicToken: config.directus?.publicToken,
   });
 
   return useApiResponse({

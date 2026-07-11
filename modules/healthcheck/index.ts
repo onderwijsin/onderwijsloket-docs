@@ -59,10 +59,9 @@ export default defineNuxtModule<ModuleOptions>({
     const runtimeDir = resolver.resolve("./runtime");
 
     nuxt.options.runtimeConfig.healthcheck = defu(
-      nuxt.options.runtimeConfig.healthcheck,
+      nuxt.options.runtimeConfig.healthcheck ?? {},
       {
         cache: options.cache,
-        cloudinary: options.cloudinary,
         directus: options.directus,
       },
     );
