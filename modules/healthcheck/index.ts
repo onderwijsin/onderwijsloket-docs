@@ -76,7 +76,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.routeRules = nuxt.options.routeRules ?? {};
     nuxt.options.routeRules["/api/system/**"] = {
-      ...(nuxt.options.routeRules["/api/system/**"] || {}),
+      ...nuxt.options.routeRules["/api/system/**"],
       cache: false,
       prerender: false
     };

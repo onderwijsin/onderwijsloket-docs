@@ -39,8 +39,13 @@ export default defineNuxtModule<ModuleOptions>({
     const log = useLogger(LOG_SCOPE);
     const { isPrepareMode } = usePrepareMode(nuxt);
 
-    const { start, end, isEnabled, options, checkAndGetApiToken } =
-      moduleSetup<ResolvedModuleOptions>(MODULE_NAME, MODULE_KEY, userOptions, DEFAULTS, log);
+    const { start, end, isEnabled } = moduleSetup<ResolvedModuleOptions>(
+      MODULE_NAME,
+      MODULE_KEY,
+      userOptions,
+      DEFAULTS,
+      log
+    );
 
     start();
 
@@ -89,7 +94,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.routeRules = nuxt.options.routeRules ?? {};
     // Cache management endpoints must always bypass Nitro route caching/prerendering.
     nuxt.options.routeRules["/api/_cache/**"] = {
-      ...(nuxt.options.routeRules["/api/_cache/**"] || {}),
+      ...nuxt.options.routeRules["/api/_cache/**"],
       cache: false,
       prerender: false
     };
