@@ -32,20 +32,10 @@ export default defineNuxtConfig({
           handler?.route !== assistantApiPath ||
           !String(handler?.handler).includes("/docus/modules/assistant/")
       );
-    },
-
-    /**
-     * Docus is an extended Nuxt layer, so Nuxt includes its runtime source in
-     * the generated typecheck project. Keep application typechecking enabled
-     * while excluding diagnostics owned by the external Docus dependency.
-     */
-    "prepare:types"({ tsConfig }) {
-      tsConfig.include = tsConfig.include?.filter(
-        (entry) =>
-          !entry.includes("/node_modules/.pnpm/docus@") && !entry.includes("/node_modules/docus/")
-      );
     }
   },
+
+  css: ["~/assets/css/main.css"],
 
   alias: {
     "@config": fileURLToPath(new URL("./config", import.meta.url)),
@@ -234,14 +224,6 @@ export default defineNuxtConfig({
   },
 
   typescript: {
-    tsConfig: {
-      /**
-       * Docus is a third-party Nuxt layer whose source is included by Nuxt's
-       * generated typecheck config. Exclude both pnpm's real package path and
-       * the conventional node_modules path from TypeScript's program.
-       */
-      exclude: ["**/node_modules/.pnpm/docus@*/**", "**/node_modules/docus/**"]
-    },
     nodeTsConfig: {
       compilerOptions: {
         paths: {

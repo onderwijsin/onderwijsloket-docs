@@ -17,9 +17,5 @@ Formatting and lint fixes are automatically re-staged, so they are included in
 the commit without staging unrelated working-tree changes. Husky remains
 responsible for installing the Git hooks and validating commit messages.
 
-The typecheck excludes source files owned by the external Docus layer. Nuxt
-includes those files because Docus is configured as an extended layer; project
-and server source files remain included in the check.
-
 Run `corepack pnpm dev` to start the local Docus site. Environment values are loaded through
 Varlock; see [Runtime and environment](./runtime.md).
