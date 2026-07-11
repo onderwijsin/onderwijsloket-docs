@@ -189,6 +189,9 @@ export default defineNuxtConfig({
       baseUrl: ENV.DIRECTUS_URL,
       publicToken: ENV.DIRECTUS_PUBLIC_TOKEN,
     },
+    mistral: {
+      apiKey: ENV.MISTRAL_API_KEY,
+    },
     public: {
       siteUrl: appUrl,
       siteName: siteTitle,

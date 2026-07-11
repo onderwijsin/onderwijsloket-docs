@@ -32,13 +32,13 @@ export default defineNuxtModule<ModuleOptions>({
     },
   },
   defaults: DEFAULTS,
-  // moduleDependencies: {
-  // 	'~~/modules/cache': {
-  // 		defaults: {
-  // 			enabled: true
-  // 		}
-  // 	}
-  // },
+  moduleDependencies: {
+    "~~/modules/cache": {
+      defaults: {
+        enabled: true,
+      },
+    },
+  },
   setup(userOptions, nuxt) {
     const log = useLogger(LOG_SCOPE);
     const { start, end, isEnabled, options } = moduleSetup<ModuleOptions>(

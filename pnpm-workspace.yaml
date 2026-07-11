@@ -8,6 +8,7 @@ allowBuilds:
 catalog:
   '@ai-sdk/gateway': 4.0.15
   '@ai-sdk/mcp': 2.0.10
+  '@ai-sdk/mistral': 4.0.8
   '@ai-sdk/vue': 4.0.19
   '@comark/nuxt': 0.5.0
   "@commitlint/cli": 21.2.1
