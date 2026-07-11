@@ -1,11 +1,9 @@
+import { siteTitle, siteDescription } from "@config/identity";
+
 export default defineAppConfig({
   seo: {
-    // Default to `%s - ${site.name}`
-    titleTemplate: "",
-    // Default to package.json name
-    title: "Onderwijsloket Docs",
-    // Default to package.json description
-    description: ""
+    title: siteTitle,
+    description: siteDescription
   },
 
   search: {
@@ -14,11 +12,8 @@ export default defineAppConfig({
   socials: {
     github: "https://github.com/onderwijsin"
   },
-  github: {
-    url: "https://github.com/onderwijsin/onderwijsloket-docs",
-    branch: "main",
-    rootDir: "."
-  },
+  // @ts-expect-error upstream type mismatch
+  github: false,
   toc: {
     // Rename the title of the table of contents
     title: "On this page",

@@ -5,6 +5,7 @@ import { version } from "./package.json";
 import { resolveEnvironment, resolveTurnstile } from "./config/helpers";
 import { app } from "./config/head";
 import identity, { siteDescription, siteTitle } from "./config/identity";
+import { ofetch } from "ofetch";
 
 // Runtime environments
 const { environment, isDebug, isProd, isPreview, isDev, isTest } = resolveEnvironment(ENV.MODE);
@@ -35,7 +36,7 @@ export default defineNuxtConfig({
     }
   },
 
-  css: ["~/assets/css/main.css"],
+  // css: ["~/assets/css/main.css"],
 
   alias: {
     "@config": fileURLToPath(new URL("./config", import.meta.url)),
@@ -167,14 +168,21 @@ export default defineNuxtConfig({
     metaData: {
       title: siteTitle
     },
-    searchHotKey: "k",
+    customFetch: ofetch as typeof fetch,
+    searchHotKey: undefined,
     showSidebar: true,
     pathRouting: {
       basePath: "/explorer"
     },
+    hideSearch: true,
+    hideDarkModeToggle: true,
     agent: {
       disabled: true
     },
+    mcp: {
+      disabled: true
+    },
+    hideClientButton: true,
     url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml"
   },
 
