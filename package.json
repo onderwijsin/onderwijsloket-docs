@@ -11,7 +11,7 @@
     "release": "semantic-release",
     "analyze": "nuxt analyze",
     "env:check": "varlock load",
-    "env:typegen": "varlock typegen",
+    "env:typegen": "varlock codegen",
     "nuxt:prepare": "nuxt prepare",
     "prepare": "husky || true && pnpm nuxt:prepare",
     "typecheck": "pnpm env:typegen && nuxi typecheck",
@@ -57,7 +57,8 @@
     "husky": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
-    "semantic-release": "catalog:"
+    "semantic-release": "catalog:",
+    "vue-tsc": "catalog:"
   },
   "packageManager": "pnpm@11.11.0",
   "varlock": {
