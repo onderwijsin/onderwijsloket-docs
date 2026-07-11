@@ -18,7 +18,12 @@ const appUrl = ENV.NUXT_PUBLIC_SITE_URL!;
 
 export default defineNuxtConfig({
   extends: ["docus"],
-  modules: ["@scalar/nuxt", "@nuxtjs/turnstile", "@nuxtjs/plausible"],
+  modules: [
+    "@scalar/nuxt",
+    "@nuxtjs/turnstile",
+    "@nuxtjs/plausible",
+    "nuxt-schema-org",
+  ],
 
   alias: {
     "@config": fileURLToPath(new URL("./config", import.meta.url)),
@@ -197,6 +202,36 @@ export default defineNuxtConfig({
       },
       tracking: {
         disabled: ENV.DISABLE_TRACKING === true,
+      },
+    },
+  },
+
+  typescript: {
+    nodeTsConfig: {
+      compilerOptions: {
+        paths: {
+          /**
+           * Even though nuxt internally makes availabe aliasses such as ~ and ~~, we need to redeclare them here.
+           * Otherwise our local modules will not be able to use the aliasses when importing from the parent project.
+           */
+          "~": ["../app"],
+          "~/*": ["../app/*"],
+          "@": ["../app"],
+          "@/*": ["../app/*"],
+          "~~": [".."],
+          "~~/*": ["../*"],
+          "@@": [".."],
+          "@@/*": ["../*"],
+          "#shared": ["../shared"],
+          "#shared/*": ["../shared/*"],
+          "#server": ["../server"],
+          "#server/*": ["../server/*"],
+          "@config": ["../config"],
+          "@config/*": ["../config/*"],
+          "@schema": ["../schema"],
+          "@schema/*": ["../schema/*"],
+          "@constants": ["../config/constants.ts"],
+        },
       },
     },
   },
