@@ -55,6 +55,7 @@
     "@types/cloudflare-turnstile": "catalog:",
     "consola": "catalog:",
     "husky": "catalog:",
+    "lint-staged": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "semantic-release": "catalog:",

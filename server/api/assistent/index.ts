@@ -1,14 +1,9 @@
-import {
-  streamText,
-  convertToModelMessages,
-  stepCountIs,
-  smoothStream,
-} from "ai";
-import type { ToolSet } from "ai";
+import { streamText, convertToModelMessages, stepCountIs, smoothStream, type ToolSet } from "ai";
 import { createMCPClient } from "@ai-sdk/mcp";
 import type { H3Event } from "h3";
-
 import { createMistral } from "@ai-sdk/mistral";
+
+import { getSystemPrompt } from "../../utils/ai/system";
 
 const MAX_STEPS = 10;
 
@@ -31,46 +26,7 @@ function createLocalFetch(event: H3Event): typeof fetch {
   };
 }
 
-function getSystemPrompt(siteName: string) {
-  return `You are the documentation assistant for ${siteName}. Help users navigate and understand the project documentation.
-
-**Your identity:**
-- You are an assistant helping users with ${siteName} documentation
-- NEVER use first person ("I", "me", "my") - always refer to the project by name: "${siteName} provides...", "${siteName} supports...", "The project offers..."
-- Be confident and knowledgeable about the project
-- Speak as a helpful guide, not as the documentation itself
-
-**Tool usage (CRITICAL):**
-- You have tools: list-pages (discover pages) and get-page (read a page)
-- If a page title clearly matches the question, read it directly without listing first
-- ALWAYS respond with text after using tools - never end with just tool calls
-
-**Guidelines:**
-- If you can't find something, say "There is no documentation on that yet" or "${siteName} doesn't cover that topic yet"
-- Be concise, helpful, and direct
-- Guide users like a friendly expert would
-
-**Links and exploration:**
-- Tool results include a \`url\` for each page — prefer markdown links \`[label](url)\` so users can open the doc in one click
-- When it helps, add extra links (related pages, "read more", side topics) — make the answer easy to dig into, not a wall of text
-- Stick to URLs from tool results (\`url\` / \`path\`) so links stay valid
-
-**FORMATTING RULES (CRITICAL):**
-- NEVER use markdown headings (#, ##, ###, etc.)
-- Use **bold text** for emphasis and section labels
-- Start responses with content directly, never with a heading
-- Use bullet points for lists
-- Keep code examples focused and minimal
-
-**Response style:**
-- Conversational but professional
-- "Here's how you can do that:" instead of "The documentation shows:"
-- "${siteName} supports TypeScript out of the box" instead of "I support TypeScript"
-- Provide actionable guidance, not just information dumps`;
-}
-
 export default defineEventHandler(async (event) => {
-  console.log("Handling request for assistant API");
   const { messages } = await readBody(event);
   const config = useRuntimeConfig();
   const siteConfig = getSiteConfig(event);
@@ -78,8 +34,7 @@ export default defineEventHandler(async (event) => {
   const siteName = siteConfig.name || "Documentation";
 
   const mcpServer = config.assistant.mcpServer;
-  const isExternalUrl =
-    mcpServer.startsWith("http://") || mcpServer.startsWith("https://");
+  const isExternalUrl = mcpServer.startsWith("http://") || mcpServer.startsWith("https://");
   const baseURL = config.app?.baseURL?.replace(/\/$/, "") || "";
 
   const mistral = createMistral({ apiKey: config.mistral.apiKey });
@@ -91,18 +46,18 @@ export default defineEventHandler(async (event) => {
   if (isExternalUrl) {
     transport = {
       type: "http",
-      url: mcpServer,
+      url: mcpServer
     };
   } else if (import.meta.dev) {
     transport = {
       type: "http",
-      url: `http://localhost:3000${baseURL}${mcpServer}`,
+      url: `http://localhost:3000${baseURL}${mcpServer}`
     };
   } else {
     transport = {
       type: "http",
       url: `${getRequestURL(event).origin}${baseURL}${mcpServer}`,
-      fetch: createLocalFetch(event),
+      fetch: createLocalFetch(event)
     };
   }
 
@@ -124,8 +79,8 @@ export default defineEventHandler(async (event) => {
     },
     providerOptions: {
       gateway: {
-        caching: "auto",
-      },
+        caching: "auto"
+      }
     },
     system: getSystemPrompt(siteName),
     messages: await convertToModelMessages(messages),
@@ -133,6 +88,6 @@ export default defineEventHandler(async (event) => {
     experimental_transform: smoothStream(),
     onFinish: closeMcp,
     onAbort: closeMcp,
-    onError: closeMcp,
+    onError: closeMcp
   }).toUIMessageStreamResponse();
 });

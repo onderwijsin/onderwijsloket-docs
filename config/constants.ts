@@ -3,10 +3,9 @@
  */
 export const APP_IDENTITY = {
   /** Main application title shown in browser/page metadata. */
-  siteTitle: "Stichting Onderwijs in",
+  siteTitle: "Onderwijsloket Docs",
   /** Primary SEO description used in page metadata. */
-  siteDescription:
-    "Bij Onderwijs in vinden we dat de allerbeste mensen in het onderwijs zouden moeten werken; de plek waar toekomstige generaties worden opgeleid."
+  siteDescription: "Technical documentation and specifications for the Onderwijsloket API platform"
 } as const;
 
 /**

@@ -31,6 +31,7 @@ catalog:
   consola: 3.4.2
   docus: 5.12.3
   husky: 9.1.7
+  lint-staged: 17.0.8
   nuxt: 4.4.8
   nuxt-schema-org: 6.2.3
   ofetch: 1.5.1

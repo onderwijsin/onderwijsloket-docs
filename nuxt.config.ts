@@ -234,6 +234,14 @@ export default defineNuxtConfig({
   },
 
   typescript: {
+    tsConfig: {
+      /**
+       * Docus is a third-party Nuxt layer whose source is included by Nuxt's
+       * generated typecheck config. Exclude both pnpm's real package path and
+       * the conventional node_modules path from TypeScript's program.
+       */
+      exclude: ["**/node_modules/.pnpm/docus@*/**", "**/node_modules/docus/**"]
+    },
     nodeTsConfig: {
       compilerOptions: {
         paths: {
