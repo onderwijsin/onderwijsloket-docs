@@ -42,7 +42,14 @@ const links = computed<FooterLink[]>(() => {
 </script>
 
 <template>
-  <UButton size="sm" color="neutral" variant="ghost" :to="appConfig.statusPage" label="Status" />
+  <UButton
+    v-if="appConfig.statusPage"
+    size="sm"
+    color="neutral"
+    variant="ghost"
+    :to="appConfig.statusPage"
+    label="Status"
+  />
   <UButton
     v-for="(link, index) of links"
     :key="index"
