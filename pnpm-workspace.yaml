@@ -37,6 +37,7 @@ catalog:
   ofetch: 1.5.1
   oxfmt: 0.58.0
   oxlint: 1.73.0
+  prettier-plugin-mdc: 0.2.1
   semantic-release: 25.0.5
   ufo: 1.6.4
   unstorage: 1.17.5

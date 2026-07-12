@@ -20,7 +20,7 @@ Docus brings the best of the Nuxt ecosystem into one CLI.
   ---
   color: neutral
   size: xl
-  to: /getting-started/installation
+  to: /getting-started
   trailing-icon: i-lucide-arrow-right
   ---
   Get started
@@ -29,12 +29,12 @@ Docus brings the best of the Nuxt ecosystem into one CLI.
   :::u-button
   ---
   color: neutral
-  icon: simple-icons-github
+  icon: lucide:code-xml
   size: xl
-  to: https://github.com/nuxt-content/docus
+  to: /api-reference
   variant: outline
   ---
-  Star on GitHub
+  API Reference
   :::
 ::
 
