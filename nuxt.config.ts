@@ -9,6 +9,12 @@ import { ofetch } from "ofetch";
 import { SCALAR_BASE_PATH } from "./config/constants";
 import { OPENAPI_DOCUMENT_SLUG } from "./config/openapi";
 import { getOpenApiScalarUrl } from "./lib/openapi";
+import {
+  SITE_MCP_BROWSER_REDIRECT,
+  SITE_MCP_DESCRIPTION,
+  SITE_MCP_NAME,
+  SITE_MCP_ROUTE
+} from "./config/siteMcp";
 
 // Runtime environments
 const { environment, isDebug, isProd, isPreview, isDev, isTest } = resolveEnvironment(ENV.MODE);
@@ -121,7 +127,11 @@ export default defineNuxtConfig({
   },
 
   mcp: {
-    version
+    version,
+    route: SITE_MCP_ROUTE,
+    browserRedirect: SITE_MCP_BROWSER_REDIRECT,
+    name: SITE_MCP_NAME,
+    description: SITE_MCP_DESCRIPTION
   },
 
   schemaOrg: {

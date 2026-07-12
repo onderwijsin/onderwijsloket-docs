@@ -15,9 +15,9 @@ Important directories:
 
 ## OpenAPI search index
 
-The Scalar API reference and searchable API index share one configured source and generate virtual
-Nuxt Content records during the build. See [OpenAPI API reference and search](./openapi.md) for the
-source contract, build pipeline, Scalar routing, and FTS5 ranking behavior.
+The Scalar API reference and searchable API index share one configured source. The build-time
+search pipeline is documented in [OpenAPI parsing and search](./openapi.md); Scalar UI integration
+is documented in [Scalar API reference](./scalar.md).
 
 Keep reusable behavior in the existing directory that owns it. Check nearby code before adding a
 new pattern.

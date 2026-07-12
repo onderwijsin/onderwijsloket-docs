@@ -1,5 +1,9 @@
 import { defineNuxtPlugin } from "#app/nuxt";
 import { computed, useColorMode, useHead, watch } from "#imports";
+import { SCALAR_BASE_PATH } from "@config/constants";
+
+const NUXT_COLOR_MODE_STORAGE_KEY = "nuxt-color-mode";
+const SCALAR_COLOR_MODE_STORAGE_KEY = "colorMode";
 
 /**
  * Synchronizes the active color mode with the body class.
@@ -10,6 +14,26 @@ export default defineNuxtPlugin((nuxtApp): void => {
   const colorMode = useColorMode();
 
   const bodyClass = computed<string>(() => `${colorMode.value}-mode`);
+
+  /**
+   * Mirrors the resolved parent color mode into Scalar's storage key.
+   *
+   * Scalar's Nuxt integration reads this key before hydration, while Nuxt
+   * Color Mode stores the user's preference under a different key.
+   *
+   * @returns Nothing.
+   */
+  const syncScalarColorMode = (): void => {
+    if (!import.meta.client) {
+      return;
+    }
+
+    try {
+      window.localStorage.setItem(SCALAR_COLOR_MODE_STORAGE_KEY, colorMode.value);
+    } catch {
+      // Storage can be unavailable in private or restricted browser contexts.
+    }
+  };
 
   /**
    * Removes stale mode classes and applies the current color mode.
@@ -32,21 +56,42 @@ export default defineNuxtPlugin((nuxtApp): void => {
   useHead({
     bodyAttrs: {
       class: bodyClass
-    }
+    },
+    script: [
+      {
+        id: "scalar-color-mode-bridge",
+        tagPosition: "head",
+        innerHTML: `(() => {
+          if (window.location.pathname !== ${JSON.stringify(SCALAR_BASE_PATH)} && !window.location.pathname.startsWith(${JSON.stringify(`${SCALAR_BASE_PATH}/`)})) return;
+          try {
+            const preference = window.__NUXT_COLOR_MODE__?.preference ?? window.localStorage.getItem(${JSON.stringify(NUXT_COLOR_MODE_STORAGE_KEY)}) ?? "system";
+            const mode = window.__NUXT_COLOR_MODE__?.value ?? (preference === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light" : preference);
+            if (mode === "dark" || mode === "light") window.localStorage.setItem(${JSON.stringify(SCALAR_COLOR_MODE_STORAGE_KEY)}, mode);
+          } catch {}
+        })();`
+          .replace(/[\n\r]/g, "")
+          .replace(/ +/g, " ")
+      }
+    ]
   });
 
-  watch(
-    () => colorMode.value,
-    () => {
-      syncBodyClass();
-    }
-  );
+  /**
+   * Applies the parent color mode to Scalar and its document body.
+   *
+   * @returns Nothing.
+   */
+  const syncColorMode = (): void => {
+    syncScalarColorMode();
+    syncBodyClass();
+  };
+
+  watch(() => colorMode.value, syncColorMode, { immediate: true });
 
   nuxtApp.hook("app:mounted", () => {
-    syncBodyClass();
+    syncColorMode();
   });
 
   nuxtApp.hook("page:finish", () => {
-    syncBodyClass();
+    syncColorMode();
   });
 });
