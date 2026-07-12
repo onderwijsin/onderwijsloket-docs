@@ -19,3 +19,9 @@ responsible for installing the Git hooks and validating commit messages.
 
 Run `corepack pnpm dev` to start the local Docus site. Environment values are loaded through
 Varlock; see [Runtime and environment](./runtime.md).
+
+## OpenAPI source
+
+Configure the single API source in `config/openapi.ts` and run `corepack pnpm build` after changing
+it. See [OpenAPI API reference and search](./openapi.md) for local and remote source formats,
+build-failure policy, and troubleshooting steps.

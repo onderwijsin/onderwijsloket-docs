@@ -4,6 +4,10 @@ declare module "@nuxt/schema" {
     publisher: {
       name: string;
       url: string;
+      contact?: string;
+    };
+    scalar: {
+      enabled: boolean;
     };
   }
   interface AppConfig {
@@ -11,6 +15,10 @@ declare module "@nuxt/schema" {
     publisher: {
       name: string;
       url: string;
+      contact?: string;
+    };
+    scalar: {
+      enabled: boolean;
     };
   }
 }

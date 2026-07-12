@@ -29,7 +29,7 @@ const links = computed<FooterLink[]>(() => {
     appConfig.github && appConfig.github.url
       ? [
           {
-            icon: "i-simple-icons-github",
+            icon: getIcon("github"),
             to: appConfig.github.url,
             target: "_blank" as const,
             "aria-label": "GitHub repository"

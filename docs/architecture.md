@@ -13,5 +13,11 @@ Important directories:
 - `envs/` — Varlock environment schemas and local profiles.
 - `public/` — static assets.
 
+## OpenAPI search index
+
+The Scalar API reference and searchable API index share one configured source. The build-time
+search pipeline is documented in [OpenAPI parsing and search](./openapi.md); Scalar UI integration
+is documented in [Scalar API reference](./scalar.md).
+
 Keep reusable behavior in the existing directory that owns it. Check nearby code before adding a
 new pattern.
