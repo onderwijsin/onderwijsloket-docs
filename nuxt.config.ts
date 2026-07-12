@@ -6,6 +6,7 @@ import { resolveEnvironment, resolveTurnstile } from "./config/helpers";
 import { app } from "./config/head";
 import identity, { siteDescription, siteTitle } from "./config/identity";
 import { ofetch } from "ofetch";
+import { SCALAR_BASE_PATH } from "./config/constants";
 
 // Runtime environments
 const { environment, isDebug, isProd, isPreview, isDev, isTest } = resolveEnvironment(ENV.MODE);
@@ -171,7 +172,7 @@ export default defineNuxtConfig({
     searchHotKey: undefined,
     showSidebar: true,
     pathRouting: {
-      basePath: "/api-reference"
+      basePath: SCALAR_BASE_PATH
     },
     hideSearch: true,
     hideDarkModeToggle: true,
@@ -263,6 +264,9 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    [SCALAR_BASE_PATH]: {
+      ssr: false
+    },
     "/guides": {
       redirect: "/"
     },

@@ -1,10 +1,16 @@
 import { siteTitle, siteDescription } from "@config/identity";
+import { getIcon } from "~~/shared/utils/icons";
 
 export default defineAppConfig({
   statusPage: "https://kuma.onderwijsin.nl/status/onderwijsloket",
   publisher: {
     name: "Stichting Onderwijs in",
-    url: "https://onderwijsin.nl"
+    url: "https://onderwijsin.nl",
+    contact: "https://onderwijsin.nl/contact"
+  },
+
+  scalar: {
+    enabled: true
   },
 
   seo: {
@@ -28,19 +34,19 @@ export default defineAppConfig({
       title: "Further Reading",
       links: [
         {
-          icon: "lucide:github",
+          icon: getIcon("github_alt"),
           label: "Code Examples",
           to: "https://github.com/onderwijsin/onderwijsloket-examples",
           target: "_blank"
         },
         {
-          icon: "lucide:code",
+          icon: getIcon("code"),
           label: "View Source",
           to: "https://github.com/onderwijsin/onderwijsloket-docs",
           target: "_blank"
         },
         {
-          icon: "lucide:send",
+          icon: getIcon("mail"),
           label: "Newsletter",
           to: "https://onderwijsin.nl/nieuwsbrief",
           target: "_blank"

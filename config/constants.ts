@@ -36,3 +36,8 @@ export const TURNSTILE_ACTIONS = {
    */
   contact: "contact_submit"
 } as const;
+
+/**
+ * Base path for Scalar API Reference
+ */
+export const SCALAR_BASE_PATH = "/api-reference";

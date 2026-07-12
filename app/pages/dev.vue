@@ -1,8 +1,10 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const { data } = await useAsyncData("operations", () => queryCollection("operations").all());
+</script>
 
 <template>
   <UContainer>
     <h1 class="font-bold">Hello</h1>
-    <div class="h-24 w-24 test bg-primary"></div>
+    <pre>{{ data }}</pre>
   </UContainer>
 </template>
