@@ -7,6 +7,7 @@ import { app } from "./config/head";
 import identity, { siteDescription, siteTitle } from "./config/identity";
 import { ofetch } from "ofetch";
 import { SCALAR_BASE_PATH } from "./config/constants";
+import { getOpenApiScalarUrl, OPENAPI_DOCUMENT_SLUG } from "./config/openapi";
 
 // Runtime environments
 const { environment, isDebug, isProd, isPreview, isDev, isTest } = resolveEnvironment(ENV.MODE);
@@ -183,7 +184,8 @@ export default defineNuxtConfig({
       disabled: true
     },
     hideClientButton: true,
-    url: "https://registry.scalar.com/@onderwijsin/apis/dynamic-onderwijsloket-api-specification@latest"
+    slug: OPENAPI_DOCUMENT_SLUG,
+    url: getOpenApiScalarUrl()
   },
 
   healthcheck: {

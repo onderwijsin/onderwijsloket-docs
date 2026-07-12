@@ -1,4 +1,5 @@
 import { defineContentConfig, defineCollection, z } from "@nuxt/content";
+import { createOpenApiContentSource } from "./config/openapi-content";
 
 /**
  * Since we want to do various customization on the content collections, we are
@@ -47,16 +48,18 @@ export default defineContentConfig({
       }
     }),
 
-    // Custom collections
-    operations: defineCollection({
-      type: "data",
-      source: {
-        include: "operations/**/*.yml",
-        exclude: ["index.md"]
-      },
+    // Build-time OpenAPI records. The custom source returns virtual Markdown
+    // files, allowing Nuxt Content's FTS5 indexer to search them.
+    api: defineCollection({
+      type: "page",
+      source: createOpenApiContentSource(),
       schema: z.object({
-        id: z.string(),
-        description: z.string()
+        kind: z.enum(["info", "tag", "operation", "schema"]),
+        scalarTarget: z.string(),
+        method: z.string().optional(),
+        path: z.string().optional(),
+        operationId: z.string().optional(),
+        tags: z.array(z.string()).optional()
       })
     })
   }

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { data } = await useAsyncData("operations", () => queryCollection("operations").all());
+const { data } = await useAsyncData("api", () => queryCollection("api").all());
 </script>
 
 <template>

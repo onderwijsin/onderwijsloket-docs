@@ -29,6 +29,7 @@
     "@nuxtjs/plausible": "catalog:",
     "@nuxtjs/turnstile": "catalog:",
     "@scalar/nuxt": "catalog:",
+    "@scalar/openapi-parser": "catalog:",
     "@varlock/proton-pass-plugin": "catalog:",
     "@varlock/vite-integration": "catalog:",
     "ai": "catalog:",
