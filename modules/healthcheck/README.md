@@ -43,7 +43,7 @@ export default defineNuxtConfig({
       }
     }
   }
-})
+});
 ```
 
 - `warn`: component status becomes `warn` when `responseTimeMs >= warn`

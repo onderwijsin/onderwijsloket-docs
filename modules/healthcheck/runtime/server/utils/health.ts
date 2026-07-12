@@ -3,7 +3,7 @@ import type {
   HealthCheckResult,
   HealthCheckThreshold,
   HealthStatus,
-  SystemHealthResponse,
+  SystemHealthResponse
 } from "../../types/health";
 
 import { ofetch } from "ofetch";
@@ -26,12 +26,9 @@ function getErrorMessage(error: unknown): string {
 
 function resolveThresholdStatus(
   responseTimeMs: number,
-  threshold?: HealthCheckThreshold,
+  threshold?: HealthCheckThreshold
 ): Exclude<HealthStatus, "error"> | "error" {
-  if (
-    typeof threshold?.error === "number" &&
-    responseTimeMs >= threshold.error
-  ) {
+  if (typeof threshold?.error === "number" && responseTimeMs >= threshold.error) {
     return "error";
   }
 
@@ -44,7 +41,7 @@ function resolveThresholdStatus(
 
 async function runTimedCheck(
   check: () => Promise<void>,
-  threshold?: HealthCheckThreshold,
+  threshold?: HealthCheckThreshold
 ): Promise<HealthCheckResult> {
   const startedAt = performance.now();
 
@@ -54,13 +51,13 @@ async function runTimedCheck(
 
     return {
       status: resolveThresholdStatus(responseTimeMs, threshold),
-      responseTimeMs,
+      responseTimeMs
     };
   } catch (error) {
     return {
       status: "error",
       responseTimeMs: getResponseTime(startedAt),
-      error: getErrorMessage(error),
+      error: getErrorMessage(error)
     };
   }
 }
@@ -75,11 +72,7 @@ async function checkCacheStorage(): Promise<void> {
 
     const stored = await storage.getItem<{ health?: number } | null>(key);
 
-    if (
-      !stored ||
-      typeof stored !== "object" ||
-      stored.health !== value.health
-    ) {
+    if (!stored || typeof stored !== "object" || stored.health !== value.health) {
       throw new Error("Cache storage returned an unexpected value");
     }
   } finally {
@@ -97,7 +90,7 @@ async function checkDirectus(event: H3Event): Promise<void> {
 
   await ofetch(joinURL(directusBaseUrl, DIRECTUS_PING_PATH), {
     retry: 0,
-    timeout: 5000,
+    timeout: 5000
   });
 }
 
@@ -119,19 +112,14 @@ function resolveOverallStatus(checks: HealthCheckResult[]): HealthStatus {
  * @param event - Nitro request event used to resolve runtime configuration.
  * @returns Overall health status with per-component timing data.
  */
-export async function getSystemHealth(
-  event: H3Event,
-): Promise<SystemHealthResponse> {
+export async function getSystemHealth(event: H3Event): Promise<SystemHealthResponse> {
   const timestamp = new Date().toISOString();
   const config = useRuntimeConfig(event);
   const healthcheckConfig = config.healthcheck;
 
   const [cache, directus] = await Promise.all([
     runTimedCheck(checkCacheStorage, healthcheckConfig?.cache?.threshold),
-    runTimedCheck(
-      () => checkDirectus(event),
-      healthcheckConfig?.directus?.threshold,
-    ),
+    runTimedCheck(() => checkDirectus(event), healthcheckConfig?.directus?.threshold)
   ]);
 
   return {
@@ -139,7 +127,7 @@ export async function getSystemHealth(
     timestamp,
     components: {
       cache,
-      directus,
-    },
+      directus
+    }
   };
 }

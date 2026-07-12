@@ -1,3 +1,3 @@
 export interface InternalApiResponse<T> {
-	data: T
+  data: T;
 }

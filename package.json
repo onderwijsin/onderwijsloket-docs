@@ -11,17 +11,19 @@
     "release": "semantic-release",
     "analyze": "nuxt analyze",
     "env:check": "varlock load",
-    "env:typegen": "varlock typegen",
+    "env:typegen": "varlock codegen",
     "nuxt:prepare": "nuxt prepare",
     "prepare": "husky || true && pnpm nuxt:prepare",
-    "typecheck": "pnpm env:typegen && nuxi typecheck"
-  },
-  "varlock": {
-    "loadPath": "./envs/"
+    "typecheck": "pnpm env:typegen && nuxi typecheck",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "dependencies": {
     "@ai-sdk/gateway": "catalog:",
     "@ai-sdk/mcp": "catalog:",
+    "@ai-sdk/mistral": "catalog:",
     "@ai-sdk/vue": "catalog:",
     "@comark/nuxt": "catalog:",
     "@nuxtjs/plausible": "catalog:",
@@ -53,7 +55,14 @@
     "@types/cloudflare-turnstile": "catalog:",
     "consola": "catalog:",
     "husky": "catalog:",
-    "semantic-release": "catalog:"
+    "lint-staged": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "semantic-release": "catalog:",
+    "vue-tsc": "catalog:"
   },
-  "packageManager": "pnpm@11.11.0"
+  "packageManager": "pnpm@11.11.0",
+  "varlock": {
+    "loadPath": "./envs/"
+  }
 }

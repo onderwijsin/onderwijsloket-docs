@@ -1,23 +1,25 @@
+import { siteTitle, siteDescription } from "@config/identity";
+
 export default defineAppConfig({
-  seo: {
-    // Default to `%s - ${site.name}`
-    titleTemplate: "",
-    // Default to package.json name
-    title: "",
-    // Default to package.json description
-    description: "",
+  statusPage: "https://kuma.onderwijsin.nl/status/onderwijsloket",
+  publisher: {
+    name: "Stichting Onderwijs in",
+    url: "https://onderwijsin.nl"
   },
+
+  seo: {
+    title: siteTitle,
+    description: siteDescription
+  },
+
   search: {
-    fts: true,
+    fts: true
   },
   socials: {
-    github: "https://github.com/onderwijsin",
+    github: "https://github.com/onderwijsin"
   },
-  github: {
-    url: "https://github.com/onderwijsin/onderwijsloket-docs",
-    branch: "main",
-    rootDir: ".",
-  },
+  // @ts-expect-error upstream type mismatch
+  github: false,
   toc: {
     // Rename the title of the table of contents
     title: "On this page",
@@ -29,36 +31,49 @@ export default defineAppConfig({
           icon: "lucide:github",
           label: "Code Examples",
           to: "https://github.com/onderwijsin/onderwijsloket-examples",
-          target: "_blank",
+          target: "_blank"
         },
         {
           icon: "lucide:code",
-          label: "View Source Code",
+          label: "View Source",
           to: "https://github.com/onderwijsin/onderwijsloket-docs",
-          target: "_blank",
+          target: "_blank"
         },
-      ],
-    },
+        {
+          icon: "lucide:send",
+          label: "Newsletter",
+          to: "https://onderwijsin.nl/nieuwsbrief",
+          target: "_blank"
+        }
+      ]
+    }
   },
   assistant: {
     // Show the floating input on documentation pages
     floatingInput: true,
-
     // Show the "Explain with AI" button in the sidebar
     explainWithAi: true,
-
     // FAQ questions to display when chat is empty
     faqQuestions: [],
-
     // Keyboard shortcuts
     shortcuts: {
-      focusInput: "meta_i",
-    },
-
-    // Custom icons
-    icons: {
-      trigger: "i-lucide-sparkles",
-      explain: "i-lucide-brain",
-    },
+      focusInput: "meta_i"
+    }
   },
+
+  ui: {
+    colors: {
+      primary: "pink",
+      secondary: "purple",
+      neutral: "zinc"
+    },
+    page: {
+      slots: {
+        root: "flex flex-col lg:grid lg:grid-cols-10 lg:gap-10",
+        left: "lg:col-span-2",
+        center: "lg:col-span-8",
+        right: "lg:col-span-2 order-first lg:order-last"
+      }
+    }
+  }
 });

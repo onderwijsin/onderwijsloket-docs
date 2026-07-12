@@ -1,4 +1,4 @@
-import type { InternalApiResponse } from '../types/api'
+import type { InternalApiResponse } from "../types/api";
 
 /**
  * Generic JSON API wrapper used by local server handlers and module runtime routes.
@@ -9,7 +9,7 @@ import type { InternalApiResponse } from '../types/api'
  * @returns An object conforming to the InternalApiResponse interface.
  */
 export function useApiResponse<T>(data: T): InternalApiResponse<T> {
-	return { data }
+  return { data };
 }
 
-export type { InternalApiResponse } from '../types/api'
+export type { InternalApiResponse } from "../types/api";

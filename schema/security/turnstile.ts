@@ -1,8 +1,8 @@
 export {
-	turnstileErrorCodeSchema,
-	turnstileErrorDataSchema
-} from '../../modules/turnstile/runtime/types/errors'
+  turnstileErrorCodeSchema,
+  turnstileErrorDataSchema
+} from "../../modules/turnstile/runtime/types/errors";
 export type {
-	TurnstileErrorCode,
-	TurnstileErrorData
-} from '../../modules/turnstile/runtime/types/errors'
+  TurnstileErrorCode,
+  TurnstileErrorData
+} from "../../modules/turnstile/runtime/types/errors";

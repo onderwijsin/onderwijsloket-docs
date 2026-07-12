@@ -1,15 +1,14 @@
 import { fileURLToPath } from "node:url";
-
 import { varlockVitePlugin } from "@varlock/vite-integration";
 import { ENV } from "varlock/env";
 import { version } from "./package.json";
 import { resolveEnvironment, resolveTurnstile } from "./config/helpers";
 import { app } from "./config/head";
 import identity, { siteDescription, siteTitle } from "./config/identity";
+import { ofetch } from "ofetch";
 
 // Runtime environments
-const { environment, isDebug, isProd, isPreview, isDev, isTest } =
-  resolveEnvironment(ENV.MODE);
+const { environment, isDebug, isProd, isPreview, isDev, isTest } = resolveEnvironment(ENV.MODE);
 
 // Resolve Turnstile keys
 const { turnstileSiteKey, turnstileSecretKey } = resolveTurnstile(environment);
@@ -18,29 +17,41 @@ const appUrl = ENV.NUXT_PUBLIC_SITE_URL!;
 
 export default defineNuxtConfig({
   extends: ["docus"],
-  modules: [
-    "@scalar/nuxt",
-    "@nuxtjs/turnstile",
-    "@nuxtjs/plausible",
-    "nuxt-schema-org",
-  ],
+  modules: ["@scalar/nuxt", "@nuxtjs/turnstile", "@nuxtjs/plausible", "nuxt-schema-org"],
+
+  hooks: {
+    /**
+     * Docus registers its assistant endpoint with `addServerHandler`, which
+     * can take precedence over the application route at the same path.
+     * Remove only Docus's duplicate so the local implementation owns it.
+     */
+    "nitro:config"(nitroConfig) {
+      const assistantApiPath = "/api/assistent";
+
+      nitroConfig.handlers = nitroConfig.handlers?.filter(
+        (handler) =>
+          handler?.route !== assistantApiPath ||
+          !String(handler?.handler).includes("/docus/modules/assistant/")
+      );
+    }
+  },
 
   alias: {
     "@config": fileURLToPath(new URL("./config", import.meta.url)),
     "@schema": fileURLToPath(new URL("./schema", import.meta.url)),
-    "@constants": fileURLToPath(new URL("./config/constants", import.meta.url)),
+    "@constants": fileURLToPath(new URL("./config/constants", import.meta.url))
   },
 
   components: [
     {
       path: "~/components",
-      pathPrefix: false,
-    },
+      pathPrefix: false
+    }
   ],
 
   app: {
     keepalive: true,
-    head: app.head,
+    head: app.head
   },
 
   vite: {
@@ -50,22 +61,23 @@ export default defineNuxtConfig({
         "@vue/devtools-core",
         "@vue/devtools-kit",
         "zod",
-      ],
+        "@unhead/schema-org/vue"
+      ]
     },
-    plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })],
+    plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })]
   },
 
   nitro: {
     experimental: {
-      asyncContext: true,
+      asyncContext: true
     },
     minify: !isDebug,
     prerender: {
       autoSubfolderIndex: true,
       crawlLinks: true,
       failOnError: true,
-      ignore: ["/dev"],
-    },
+      ignore: ["/dev"]
+    }
   },
 
   debug: {
@@ -77,14 +89,14 @@ export default defineNuxtConfig({
     modules: isDebug,
     hooks: {
       server: isDebug,
-      client: isDebug,
-    },
+      client: isDebug
+    }
   },
 
   $development: {
     routeRules: {
-      "/**": { cache: false },
-    },
+      "/**": { cache: false }
+    }
   },
 
   site: {
@@ -95,15 +107,22 @@ export default defineNuxtConfig({
     defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed
     language: "en_US",
     indexable: isProd && ENV.DISABLE_INDEXING !== true,
-    trailingSlash: false,
+    trailingSlash: false
+  },
+
+  docus: {
+    assistant: {
+      // API endpoint path
+      apiPath: "/api/assistent"
+    }
   },
 
   mcp: {
-    version,
+    version
   },
 
   schemaOrg: {
-    identity: isTest ? undefined : identity,
+    identity: isTest ? undefined : identity
   },
 
   robots: {
@@ -115,26 +134,20 @@ export default defineNuxtConfig({
           bots: "y",
           "train-ai": "n",
           "ai-output": "y",
-          search: "y",
+          search: "y"
         },
         contentSignal: {
           search: "yes",
           "ai-input": "yes",
-          "ai-train": "no",
-        },
-      },
-    ],
-  },
-
-  ui: {
-    experimental: {
-      componentDetection: true,
-    },
+          "ai-train": "no"
+        }
+      }
+    ]
   },
 
   turnstile: {
     siteKey: turnstileSiteKey,
-    secretKey: turnstileSecretKey,
+    secretKey: turnstileSecretKey
   },
 
   plausible: {
@@ -144,22 +157,32 @@ export default defineNuxtConfig({
     proxyBaseEndpoint: "/api/_plausible",
     ignoredHostnames: ["localhost"],
     autoPageviews: true,
-    autoOutboundTracking: true,
+    autoOutboundTracking: true
   },
 
   scalar: {
+    theme: "none",
     darkMode: true,
     hideModels: false,
     metaData: {
-      title: siteTitle,
+      title: siteTitle
     },
-    // proxyUrl: 'https://proxy.scalar.com',
-    searchHotKey: "k",
+    customFetch: ofetch as typeof fetch,
+    searchHotKey: undefined,
     showSidebar: true,
     pathRouting: {
-      basePath: "/explorer",
+      basePath: "/api-reference"
     },
-    url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml",
+    hideSearch: true,
+    hideDarkModeToggle: true,
+    agent: {
+      disabled: true
+    },
+    mcp: {
+      disabled: true
+    },
+    hideClientButton: true,
+    url: "https://registry.scalar.com/@onderwijsin/apis/dynamic-onderwijsloket-api-specification@latest"
   },
 
   healthcheck: {
@@ -167,15 +190,15 @@ export default defineNuxtConfig({
     cache: {
       threshold: {
         warn: 50,
-        error: 200,
-      },
+        error: 200
+      }
     },
     directus: {
       threshold: {
         warn: 200,
-        error: 1000,
-      },
-    },
+        error: 1000
+      }
+    }
   },
 
   runtimeConfig: {
@@ -183,11 +206,14 @@ export default defineNuxtConfig({
     mailchimp: {
       apiKey: ENV.MAILCHIMP_API_KEY,
       listId: ENV.MAILCHIMP_LIST,
-      server: ENV.MAILCHIMP_SERVER,
+      server: ENV.MAILCHIMP_SERVER
     },
     directus: {
       baseUrl: ENV.DIRECTUS_URL,
-      publicToken: ENV.DIRECTUS_PUBLIC_TOKEN,
+      publicToken: ENV.DIRECTUS_PUBLIC_TOKEN
+    },
+    mistral: {
+      apiKey: ENV.MISTRAL_API_KEY
     },
     public: {
       siteUrl: appUrl,
@@ -198,12 +224,12 @@ export default defineNuxtConfig({
         isProd,
         isPreview,
         isDebug,
-        value: environment,
+        value: environment
       },
       tracking: {
-        disabled: ENV.DISABLE_TRACKING === true,
-      },
-    },
+        disabled: ENV.DISABLE_TRACKING === true
+      }
+    }
   },
 
   typescript: {
@@ -230,9 +256,21 @@ export default defineNuxtConfig({
           "@config/*": ["../config/*"],
           "@schema": ["../schema"],
           "@schema/*": ["../schema/*"],
-          "@constants": ["../config/constants.ts"],
-        },
-      },
-    },
+          "@constants": ["../config/constants.ts"]
+        }
+      }
+    }
   },
+
+  routeRules: {
+    "/guides": {
+      redirect: "/"
+    },
+    "/guides/**": {
+      redirect: "/**"
+    },
+    "/guides/getting-started": {
+      redirect: "/getting-started/introduction"
+    }
+  }
 });

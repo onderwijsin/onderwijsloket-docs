@@ -11,7 +11,7 @@ import { joinURL } from "ufo";
  */
 export async function submitContactToDirectus(
   payload: ContactSubmissionSchema,
-  config: DirectusContactSubmitConfig,
+  config: DirectusContactSubmitConfig
 ): Promise<void> {
   const directusBaseUrl = config.directusBaseUrl?.trim();
   const publicToken = config.publicToken?.trim();
@@ -19,7 +19,7 @@ export async function submitContactToDirectus(
   if (!directusBaseUrl || !publicToken) {
     throw createError({
       statusCode: 500,
-      statusMessage: "Directus runtime configuration is incomplete",
+      statusMessage: "Directus runtime configuration is incomplete"
     });
   }
 
@@ -27,11 +27,11 @@ export async function submitContactToDirectus(
     method: "POST",
     headers: {
       Authorization: `Bearer ${publicToken}`,
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     body: {
       form_type: "contact",
-      payload,
-    },
+      payload
+    }
   });
 }

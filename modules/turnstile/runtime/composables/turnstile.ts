@@ -1,10 +1,10 @@
-import { turnstileErrorDataSchema } from '../types/errors'
+import { turnstileErrorDataSchema } from "../types/errors";
 
 /**
  * Turnstile widget instance shape used by forms that need an imperative reset after submission.
  */
 export interface TurnstileResetInstance {
-	reset: () => void
+  reset: () => void;
 }
 
 /**
@@ -19,94 +19,94 @@ export interface TurnstileResetInstance {
  * @returns Turnstile state and helper methods for token lifecycle handling.
  */
 export function useTurnstile() {
-	const runtimeConfig = useRuntimeConfig()
-	const token = ref<string | undefined>(undefined)
+  const runtimeConfig = useRuntimeConfig();
+  const token = ref<string | undefined>(undefined);
 
-	const toast = useToast()
+  const toast = useToast();
 
-	const isEnabled = computed(() => {
-		return Boolean(runtimeConfig.public.turnstile?.siteKey?.trim())
-	})
+  const isEnabled = computed(() => {
+    return Boolean(runtimeConfig.public.turnstile?.siteKey?.trim());
+  });
 
-	function getToken(): string | undefined {
-		return token.value?.trim() || undefined
-	}
+  function getToken(): string | undefined {
+    return token.value?.trim() || undefined;
+  }
 
-	async function getTokenWithRetry(retries = 12, delayMs = 250): Promise<string | undefined> {
-		if (!isEnabled.value) {
-			return undefined
-		}
+  async function getTokenWithRetry(retries = 12, delayMs = 250): Promise<string | undefined> {
+    if (!isEnabled.value) {
+      return undefined;
+    }
 
-		for (let attempt = 0; attempt <= retries; attempt += 1) {
-			const current = getToken()
-			if (current) {
-				return current
-			}
+    for (let attempt = 0; attempt <= retries; attempt += 1) {
+      const current = getToken();
+      if (current) {
+        return current;
+      }
 
-			await new Promise<void>((resolve) => {
-				setTimeout(resolve, delayMs)
-			})
-		}
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, delayMs);
+      });
+    }
 
-		return undefined
-	}
+    return undefined;
+  }
 
-	function isReady(): boolean {
-		if (!isEnabled.value) {
-			return true
-		}
+  function isReady(): boolean {
+    if (!isEnabled.value) {
+      return true;
+    }
 
-		return Boolean(getToken())
-	}
+    return Boolean(getToken());
+  }
 
-	function reset(instance?: TurnstileResetInstance): void {
-		token.value = undefined
-		if (!isEnabled.value) {
-			return
-		}
+  function reset(instance?: TurnstileResetInstance): void {
+    token.value = undefined;
+    if (!isEnabled.value) {
+      return;
+    }
 
-		instance?.reset()
-	}
+    instance?.reset();
+  }
 
-	function showPendingHint(): void {
-		toast.add({
-			title: 'Even wachten…',
-			description: 'Bezig met beveiligingscontrole',
-			color: 'warning'
-		})
-	}
+  function showPendingHint(): void {
+    toast.add({
+      title: "Even wachten…",
+      description: "Bezig met beveiligingscontrole",
+      color: "warning"
+    });
+  }
 
-	function showMissingTokenErrorHint(): void {
-		toast.add({
-			title: 'Beveilivingscontrole mislukt',
-			description: 'Ververs de pagina en probeer het opnieuw',
-			color: 'error'
-		})
-	}
+  function showMissingTokenErrorHint(): void {
+    toast.add({
+      title: "Beveilivingscontrole mislukt",
+      description: "Ververs de pagina en probeer het opnieuw",
+      color: "error"
+    });
+  }
 
-	function captureTurnstileError(error: unknown): boolean {
-		const data = extractErrorData(error)
-		const parsed = turnstileErrorDataSchema.safeParse(data)
+  function captureTurnstileError(error: unknown): boolean {
+    const data = extractErrorData(error);
+    const parsed = turnstileErrorDataSchema.safeParse(data);
 
-		if (!parsed.success) {
-			return false
-		}
+    if (!parsed.success) {
+      return false;
+    }
 
-		showMissingTokenErrorHint()
-		return true
-	}
+    showMissingTokenErrorHint();
+    return true;
+  }
 
-	return {
-		token,
-		isEnabled,
-		getToken,
-		getTokenWithRetry,
-		isReady,
-		reset,
-		showPendingHint,
-		showMissingTokenErrorHint,
-		captureTurnstileError
-	}
+  return {
+    token,
+    isEnabled,
+    getToken,
+    getTokenWithRetry,
+    isReady,
+    reset,
+    showPendingHint,
+    showMissingTokenErrorHint,
+    captureTurnstileError
+  };
 }
 
 /**
@@ -116,18 +116,18 @@ export function useTurnstile() {
  * @returns Nested error data payload when present.
  */
 function extractErrorData(error: unknown): unknown {
-	if (!error || typeof error !== 'object' || !('data' in error)) {
-		return undefined
-	}
+  if (!error || typeof error !== "object" || !("data" in error)) {
+    return undefined;
+  }
 
-	const errorData = (error as { data?: unknown }).data
-	if (!errorData || typeof errorData !== 'object') {
-		return errorData
-	}
+  const errorData = (error as { data?: unknown }).data;
+  if (!errorData || typeof errorData !== "object") {
+    return errorData;
+  }
 
-	if ('data' in errorData) {
-		return (errorData as { data?: unknown }).data
-	}
+  if ("data" in errorData) {
+    return (errorData as { data?: unknown }).data;
+  }
 
-	return errorData
+  return errorData;
 }
