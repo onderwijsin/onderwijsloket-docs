@@ -119,14 +119,19 @@ defineShortcuts({
   }
 });
 
+/**
+ * Badge colors for different api operations. These matches the color types used
+ * by Scalar
+ * @param method HTTP method (GET, POST, PUT, PATCH, DELETE)
+ */
 function getMethodBadgeColor(
   method?: string
 ): "success" | "info" | "warning" | "error" | "neutral" {
   switch (method) {
     case "GET":
-      return "success";
-    case "POST":
       return "info";
+    case "POST":
+      return "success";
     case "PUT":
     case "PATCH":
       return "warning";
