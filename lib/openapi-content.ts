@@ -8,9 +8,9 @@ import {
   getScalarInfoTarget,
   getScalarOperationTarget,
   getScalarSchemaTarget,
-  getScalarTagTarget,
-  openApiSource
+  getScalarTagTarget
 } from "./openapi";
+import { openApiSource } from "../config/openapi";
 
 const HTTP_METHODS = ["get", "put", "post", "delete", "options", "head", "patch", "trace"] as const;
 
@@ -250,9 +250,10 @@ function createEntries(document: UnknownRecord): ApiContentEntry[] {
       const operationId = asString(operation.operationId);
       const summary = asString(operation.summary);
       const description = asString(operation.description);
-      const title = summary || operationId || `${method.toUpperCase()} ${path}`;
+      const routeTitle = `${method.toUpperCase()} ${path}`;
+      const operationLabel = summary || operationId || routeTitle;
       const content = [
-        `${method.toUpperCase()} ${path}`,
+        routeTitle,
         operationId,
         summary,
         description,
@@ -265,8 +266,9 @@ function createEntries(document: UnknownRecord): ApiContentEntry[] {
       addEntry(entries, {
         key: `operations/${method}-${path.replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, "") || "root"}.md`,
         kind: "operation",
-        title,
-        description: description || summary || `${method.toUpperCase()} ${path}`,
+        // Index the route as the title so route-only terms outrank model names.
+        title: routeTitle,
+        description: description || summary || routeTitle,
         method: method.toUpperCase(),
         path,
         ...(operationId ? { operationId } : {}),
@@ -276,7 +278,7 @@ function createEntries(document: UnknownRecord): ApiContentEntry[] {
       });
 
       for (const tag of tags) {
-        operationsByTag.set(tag, [...(operationsByTag.get(tag) ?? []), title]);
+        operationsByTag.set(tag, [...(operationsByTag.get(tag) ?? []), operationLabel]);
       }
     }
   }

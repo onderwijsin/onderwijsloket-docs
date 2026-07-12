@@ -1,5 +1,5 @@
 import { defineContentConfig, defineCollection, z } from "@nuxt/content";
-import { createOpenApiContentSource } from "./config/openapi-content";
+import { createOpenApiContentSource } from "./lib/openapi-content";
 
 /**
  * Since we want to do various customization on the content collections, we are

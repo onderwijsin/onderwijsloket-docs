@@ -41,3 +41,17 @@ export const TURNSTILE_ACTIONS = {
  * Base path for Scalar API Reference
  */
 export const SCALAR_BASE_PATH = "/api-reference";
+
+/** Maximum visible FTS5 results per search group. */
+export const CONTENT_SEARCH_RESULT_LIMITS = {
+  documentation: 8,
+  operations: 5,
+  metadata: 5
+} as const;
+
+/** FTS5 weights for API retrieval before deterministic field-priority ranking. */
+export const API_SEARCH_FTS_WEIGHTS = {
+  title: 100,
+  content: 1,
+  heading: 0
+} as const;

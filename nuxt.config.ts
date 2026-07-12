@@ -7,7 +7,8 @@ import { app } from "./config/head";
 import identity, { siteDescription, siteTitle } from "./config/identity";
 import { ofetch } from "ofetch";
 import { SCALAR_BASE_PATH } from "./config/constants";
-import { getOpenApiScalarUrl, OPENAPI_DOCUMENT_SLUG } from "./config/openapi";
+import { OPENAPI_DOCUMENT_SLUG } from "./config/openapi";
+import { getOpenApiScalarUrl } from "./lib/openapi";
 
 // Runtime environments
 const { environment, isDebug, isProd, isPreview, isDev, isTest } = resolveEnvironment(ENV.MODE);
