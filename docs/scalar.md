@@ -30,4 +30,6 @@ resolved parent `light` or `dark` value to Scalar's `colorMode` local-storage ke
 
 The plugin also emits an inline head script on API-reference routes. It resolves Nuxt's saved
 preference before Scalar's pre-hydration script runs, preventing Scalar from flashing its configured
-default when the saved preference differs from the operating-system preference.
+default when the saved preference differs from the operating-system preference. Nuxt OG Image uses
+an isolated SSR context without Color Mode state; the plugin deliberately skips its state-dependent
+body-class synchronization there.

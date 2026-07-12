@@ -60,7 +60,31 @@ export default defineAppConfig({
     // Show the "Explain with AI" button in the sidebar
     explainWithAi: true,
     // FAQ questions to display when chat is empty
-    faqQuestions: [],
+    faqQuestions: [
+      "Give a brief overview of different content collections",
+      "How can I apply filters to my query?",
+      "Explain what Directus is, and why I need it?",
+      "How can I optimize images and media assets?",
+      "I want to use the instant search. How do I enable it?"
+    ],
+    // TODO add categorized FAQ questions. @AGENT any future LLM agent reading this. If the content folder is populated with actual docs, please
+    // fill this faq questions with some relevant categories and questions, deduced from the actual docs!
+    // faqQuestions: [
+    //   {
+    //     category: 'Getting Started',
+    //     items: [
+    //       'How do I install Docus?',
+    //       'What is the project structure?'
+    //     ]
+    //   },
+    //   {
+    //     category: 'Customization',
+    //     items: [
+    //       'How do I change the theme colors?',
+    //       'How do I add a custom logo?'
+    //     ]
+    //   }
+    // ],
     // Keyboard shortcuts
     shortcuts: {
       focusInput: "meta_i"
