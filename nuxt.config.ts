@@ -73,9 +73,6 @@ export default defineNuxtConfig({
     },
     minify: !isDebug,
     prerender: {
-      autoSubfolderIndex: true,
-      crawlLinks: true,
-      failOnError: true,
       ignore: ["/dev"]
     }
   },
