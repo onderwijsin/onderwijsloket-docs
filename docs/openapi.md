@@ -60,6 +60,20 @@ description matches, which appear before matches found only in generated OpenAPI
 adds title and description matches to the candidate set directly, preventing verbose schemas from
 hiding matching routes or models.
 
+## MCP discovery and retrieval
+
+The public MCP server exposes the generated API records as read-only tools. Each resource type has a
+discovery tool that returns compact metadata and an exact-match retrieval tool that returns its
+generated reference content and Scalar URL:
+
+- Operations: `list-api-operations` then `get-api-operation` with an HTTP method and OpenAPI path.
+- Models: `list-api-models` then `get-api-model` with the schema name.
+- Tags: `list-api-tags` then `get-api-tag` with the tag name.
+
+These tools query the build-time `api` Content collection. They do not fetch or parse the OpenAPI
+source on MCP requests, so they always reflect the same generated records used by the command
+palette and Scalar links.
+
 ## Build and troubleshooting
 
 Run `corepack pnpm build` after changing the source, parser, or generated-record contract. A build
