@@ -22,8 +22,6 @@ Varlock; see [Runtime and environment](./runtime.md).
 
 ## OpenAPI source
 
-Configure the single API source in `config/openapi.ts`. A remote source must be an HTTPS URL; a
-local source must point to a JSON or YAML file below `public/`, which Scalar loads through the
-matching public URL. Remote download failures, invalid specifications, and external `$ref`s fail
-the development startup and production build so API search cannot drift from the rendered API
-reference.
+Configure the single API source in `config/openapi.ts` and run `corepack pnpm build` after changing
+it. See [OpenAPI API reference and search](./openapi.md) for local and remote source formats,
+build-failure policy, and troubleshooting steps.

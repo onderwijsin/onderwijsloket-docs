@@ -15,20 +15,9 @@ Important directories:
 
 ## OpenAPI search index
 
-The Scalar API reference and the searchable API index share the source configured in
-`config/openapi.ts`. During a Nuxt build, `lib/openapi-content.ts` validates the root OpenAPI
-JSON or YAML document and creates virtual Markdown files in the `api` Nuxt Content collection.
-Nuxt Content stores those generated records in its build database; they are never written to or
-committed under `content/`.
-
-The `api` collection contains API information, tags, operations, and named schemas. The app search
-component queries its FTS5 index separately from the documentation index so documentation results
-remain first while API operations can display HTTP-method badges and deep-link to Scalar. API
-retrieval boosts title matches, then deterministically ranks complete title matches above
-descriptions and generated OpenAPI metadata.
-
-Only in-document (`#/…`) references are supported. Bundle an API description before using it when
-it contains external file or URL `$ref`s.
+The Scalar API reference and searchable API index share one configured source and generate virtual
+Nuxt Content records during the build. See [OpenAPI API reference and search](./openapi.md) for the
+source contract, build pipeline, Scalar routing, and FTS5 ranking behavior.
 
 Keep reusable behavior in the existing directory that owns it. Check nearby code before adding a
 new pattern.
