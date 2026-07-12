@@ -36,8 +36,6 @@ export default defineNuxtConfig({
     }
   },
 
-  // css: ["~/assets/css/main.css"],
-
   alias: {
     "@config": fileURLToPath(new URL("./config", import.meta.url)),
     "@schema": fileURLToPath(new URL("./schema", import.meta.url)),
@@ -163,6 +161,7 @@ export default defineNuxtConfig({
   },
 
   scalar: {
+    theme: "none",
     darkMode: true,
     hideModels: false,
     metaData: {
@@ -172,7 +171,7 @@ export default defineNuxtConfig({
     searchHotKey: undefined,
     showSidebar: true,
     pathRouting: {
-      basePath: "/explorer"
+      basePath: "/api-reference"
     },
     hideSearch: true,
     hideDarkModeToggle: true,
@@ -183,7 +182,7 @@ export default defineNuxtConfig({
       disabled: true
     },
     hideClientButton: true,
-    url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml"
+    url: "https://registry.scalar.com/@onderwijsin/apis/dynamic-onderwijsloket-api-specification@latest"
   },
 
   healthcheck: {
@@ -260,6 +259,18 @@ export default defineNuxtConfig({
           "@constants": ["../config/constants.ts"]
         }
       }
+    }
+  },
+
+  routeRules: {
+    "/guides": {
+      redirect: "/"
+    },
+    "/guides/**": {
+      redirect: "/**"
+    },
+    "/guides/getting-started": {
+      redirect: "/getting-started/introduction"
     }
   }
 });

@@ -1,6 +1,0 @@
-@layer scalar-base, scalar-theme, scalar-config, theme, base, components, utilities;
-@import "tailwindcss";
-
-@layer scalar-config {
-  --refs-header-height: var(--ui-header-height) !important;
-}

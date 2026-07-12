@@ -1,6 +1,12 @@
 import { siteTitle, siteDescription } from "@config/identity";
 
 export default defineAppConfig({
+  statusPage: "https://kuma.onderwijsin.nl/status/onderwijsloket",
+  publisher: {
+    name: "Stichting Onderwijs in",
+    url: "https://onderwijsin.nl"
+  },
+
   seo: {
     title: siteTitle,
     description: siteDescription
@@ -29,8 +35,14 @@ export default defineAppConfig({
         },
         {
           icon: "lucide:code",
-          label: "View Source Code",
+          label: "View Source",
           to: "https://github.com/onderwijsin/onderwijsloket-docs",
+          target: "_blank"
+        },
+        {
+          icon: "lucide:send",
+          label: "Newsletter",
+          to: "https://onderwijsin.nl/nieuwsbrief",
           target: "_blank"
         }
       ]
@@ -54,6 +66,14 @@ export default defineAppConfig({
       primary: "pink",
       secondary: "purple",
       neutral: "zinc"
+    },
+    page: {
+      slots: {
+        root: "flex flex-col lg:grid lg:grid-cols-10 lg:gap-10",
+        left: "lg:col-span-2",
+        center: "lg:col-span-8",
+        right: "lg:col-span-2 order-first lg:order-last"
+      }
     }
   }
 });
