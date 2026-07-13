@@ -19,12 +19,13 @@ const quotePath = (file) => `'${file.replaceAll("'", "'\\''")}'`;
 const task = (command, files) => `${command} ${files.map(quotePath).join(" ")}`;
 
 export default {
-  "*.{json,jsonc,md,mdc,yaml,yml}": (files) => (formatEnabled ? [task("oxfmt", files)] : []),
+  "*.{json,jsonc,md,mdc,yaml,yml}": (files) =>
+    formatEnabled ? [task("oxfmt --no-error-on-unmatched-pattern", files)] : [],
   "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx,vue}": (files) => {
     const tasks = [];
 
     if (formatEnabled) {
-      tasks.push(task("oxfmt", files));
+      tasks.push(task("oxfmt --no-error-on-unmatched-pattern", files));
     }
 
     if (lintEnabled) {

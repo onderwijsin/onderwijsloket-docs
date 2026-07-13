@@ -6,7 +6,14 @@ const ICONS = {
   code: "lucide:code",
   mail: "lucide:send",
   tag: "lucide:tag",
-  docs: "lucide:book-open"
+  docs: "lucide:book-open",
+
+  success: "lucide:badge-check",
+  warn: "lucide:triangle-alert",
+  info: "lucide:info",
+  error: "lucide:circle-x",
+
+  right: "lucide:chevron-right"
 };
 
 export type IconKey = keyof typeof ICONS;

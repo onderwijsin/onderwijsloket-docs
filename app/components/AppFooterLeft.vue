@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const app = useAppConfig();
+
+const date = useState(() => new Date().getFullYear());
 </script>
 
 <template>
-  <template>
-    <div class="text-sm text-muted">
-      Copyright © {{ new Date().getFullYear() }} -
-      <NuxtLink class="underline" :to="app.publisher.url">{{ app.publisher.name }}</NuxtLink>
-    </div>
-  </template>
+  <div class="text-sm text-muted">
+    Copyright © {{ date }} -
+    <NuxtLink class="underline" :to="app.publisher.url">{{ app.publisher.name }}</NuxtLink>
+  </div>
 </template>

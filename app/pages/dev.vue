@@ -1,10 +1,17 @@
 <script lang="ts" setup>
-const { data } = await useAsyncData("api", () => queryCollection("api").all());
+const { isProd } = useRuntimeConfig().public.mode;
+
+if (isProd) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page Not Found",
+    fatal: import.meta.client
+  });
+}
 </script>
 
 <template>
   <UContainer>
     <h1 class="font-bold">Hello</h1>
-    <pre>{{ data }}</pre>
   </UContainer>
 </template>

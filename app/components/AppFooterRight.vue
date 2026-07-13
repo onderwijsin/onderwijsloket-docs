@@ -42,19 +42,21 @@ const links = computed<FooterLink[]>(() => {
 </script>
 
 <template>
-  <UButton
-    v-if="appConfig.statusPage"
-    size="sm"
-    color="neutral"
-    variant="ghost"
-    :to="appConfig.statusPage"
-    label="Status"
-  />
-  <UButton
-    v-for="(link, index) of links"
-    :key="index"
-    size="sm"
-    v-bind="{ color: 'neutral', variant: 'ghost', ...link }"
-  />
-  <UColorModeButton v-if="!forcedColorMode" />
+  <div class="flex">
+    <UButton
+      v-if="appConfig.statusPage"
+      size="sm"
+      color="neutral"
+      variant="ghost"
+      :to="appConfig.statusPage"
+      label="Status"
+    />
+    <UButton
+      v-for="(link, index) of links"
+      :key="index"
+      size="sm"
+      v-bind="{ color: 'neutral', variant: 'ghost', ...link }"
+    />
+    <UColorModeButton v-if="!forcedColorMode" />
+  </div>
 </template>

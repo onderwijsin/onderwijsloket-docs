@@ -1,0 +1,59 @@
+hero: 
+  headline: 
+  title: Build with the <span class="text-primary">Onderwijsloket</span> API
+  title_as_html: true
+  description: Integrate trusted information about working in Dutch education into your product. Use our Directus API for content, Algolia for instant search, and Cloudinary for media.
+  links: 
+    - label: 'Start building'
+      to: '/getting-started'
+      color: 'primary'
+      size: 'xl'
+      trailingIcon: 'i-lucide-arrow-right'
+    - label: 'Explore the API'
+      to: '/api-reference'
+      color: 'neutral'
+      size: 'xl'
+      variant: 'outline'
+      icon: 'i-lucide-code-xml'
+features:
+  headline: Composable by design
+  title: "Integrate your way."
+  description: Choose the parts of our API platform that actually fit your product, and ignore the rest.
+  items:
+    - icon: i-lucide-layers
+      title: Granular Data Fetching
+      description: Query articles, FAQs, programmes, routes, locations, and the relationships between them through one structured API.
+    - icon: i-lucide-search
+      title: Instant Search
+      description: Search curated Algolia indexes with filters, facets, and geo-search for delightful user experiences.
+    - icon: i-lucide-tags
+      title: Thoughtful Taxonomy
+      description: "Use shared categories to filter, group, and contextualise content across collections."
+    - icon: i-lucide-file-json-2
+      title: Rich Content Documents
+      description: Fetch Tiptap JSON documents together with embedded relational nodes needed to render rich content.
+    - icon: i-lucide-image-upscale
+      title: Media Delivery
+      description: "Deliver stories, interviews, images, audio, and video with automated CDN and smart asset transformations."
+    - icon: i-lucide-sparkles
+      title: AI Ready
+      description: Integrate Onderwijsloket documentation in your preferred coding agent with our MCP server.
+cta:
+  title: "Ready to build\n something amazing?"
+  description: Join us in making trusted information about working in Dutch education available to everyone. Together, we can turn an open, shared mission into useful products and better public access.
+  links:
+    - label: 'Start building'
+      to: '/getting-started'
+      color: 'primary'
+      size: 'xl'
+      trailingIcon: 'i-lucide-arrow-right'
+    - label: 'Explore the API'
+      to: '/api-reference'
+      color: 'neutral'
+      size: 'xl'
+      variant: 'outline'
+      icon: 'i-lucide-code-xml'
+seo:
+  title: Onderwijsloket API documentation
+  description: Build reliable integrations with Onderwijsloket content, search, media, and guidance services.
+

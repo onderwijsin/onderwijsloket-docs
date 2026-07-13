@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 const baseSubscriber = {
-  email: z.email({ error: "Ongeldig e-mailadres" }),
-  name: z.string().min(1, { error: "Geef je naam op" })
+  email: z.email({ error: "Invalid email address" }),
+  name: z.string().min(1, { error: "Please enter your name" })
 };
 
 export const baseSubscriberSchema = z.object(baseSubscriber);
