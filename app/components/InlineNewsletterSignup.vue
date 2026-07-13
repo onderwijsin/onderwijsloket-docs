@@ -10,7 +10,10 @@ withDefaults(
 </script>
 
 <template>
-  <UPageCard variant="subtle" class="@container relative space-y-2 p-4 py-6 sm:p-6 md:p-8">
+  <UPageCard
+    variant="subtle"
+    class="@container text-center relative space-y-2 p-4 py-6 sm:p-6 md:p-8"
+  >
     <h3 class="text-xl font-black @xl:text-2xl">
       <slot name="title" />
       <span v-if="!$slots.title">{{ title }}</span>
@@ -21,7 +24,7 @@ withDefaults(
         >Sign up for our <strong>monthly deep dives</strong> - straight to your inbox.</span
       >
     </p>
-    <div class="grid w-full max-w-lg">
+    <div class="grid w-full max-w-lg mx-auto">
       <MailchimpSignup />
     </div>
   </UPageCard>

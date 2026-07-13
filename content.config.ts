@@ -28,6 +28,29 @@ const createDocsSchema = () =>
       .optional()
   });
 
+const createEnum = (options: [string, ...string[]]) => z.enum(options);
+
+const createLinkSchema = () =>
+  z.object({
+    label: z.string().nonempty(),
+    to: z.string().nonempty(),
+    icon: z.string().optional().editor({ input: "icon" }),
+    trailingIcon: z.string().optional().editor({ input: "icon" }),
+    size: createEnum(["xs", "sm", "md", "lg", "xl"]).optional(),
+    trailing: z.boolean().optional(),
+    target: createEnum(["_blank", "_self"]).optional(),
+    color: createEnum([
+      "primary",
+      "secondary",
+      "neutral",
+      "error",
+      "warning",
+      "success",
+      "info"
+    ]).optional(),
+    variant: createEnum(["solid", "outline", "subtle", "soft", "ghost", "link"]).optional()
+  });
+
 export default defineContentConfig({
   collections: {
     // Docus collections
@@ -42,10 +65,40 @@ export default defineContentConfig({
     }),
 
     landing: defineCollection({
+      source: "index.yml",
       type: "page",
-      source: {
-        include: "index.md"
-      }
+      schema: z.object({
+        seo: z
+          .object({
+            title: z.string().optional(),
+            description: z.string().optional()
+          })
+          .optional(),
+        hero: z.object({
+          headline: z.string().optional(),
+          title: z.string().nonempty(),
+          title_as_html: z.boolean().optional().default(false),
+          description: z.string().nonempty(),
+          links: z.array(createLinkSchema())
+        }),
+        features: z.object({
+          headline: z.string().optional(),
+          title: z.string().nonempty(),
+          description: z.string().nonempty(),
+          items: z.array(
+            z.object({
+              icon: z.string(),
+              title: z.string().nonempty(),
+              description: z.string().nonempty()
+            })
+          )
+        }),
+        cta: z.object({
+          title: z.string().nonempty(),
+          description: z.string().nonempty(),
+          links: z.array(createLinkSchema())
+        })
+      })
     }),
 
     // Build-time OpenAPI records. The custom source returns virtual Markdown

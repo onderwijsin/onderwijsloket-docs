@@ -86,7 +86,7 @@ async function onSubmit(event: FormSubmitEvent<MailchimpBaseSubscriberSchema>) {
       :label="richSchema[currentFieldTarget].label"
       size="xl"
       :ui="{ label: 'hidden', container: 'mt-0 sm:py-1.25' }"
-      class="grow"
+      class="grow form-field"
     >
       <UInput
         ref="input"
@@ -103,7 +103,7 @@ async function onSubmit(event: FormSubmitEvent<MailchimpBaseSubscriberSchema>) {
       />
     </UFormField>
     <div
-      class="absolute top-1/2 right-2 aspect-square size-8 -translate-y-1/2 rounded-md bg-white sm:relative sm:-left-1 sm:aspect-auto sm:size-auto sm:min-w-[150px]"
+      class="absolute top-1/2 right-2 aspect-square size-8 -translate-y-1/2 rounded-md bg-white sm:relative sm:-left-1 sm:aspect-auto sm:size-auto sm:min-w-[120px]"
     >
       <UButton
         size="lg"
