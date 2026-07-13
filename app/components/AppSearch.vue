@@ -2,7 +2,7 @@
 import { SCALAR_BASE_PATH } from "@config/constants";
 
 import type { ContentNavigationItem, PageCollections } from "@nuxt/content";
-import type { GlobalSearchItem } from "~/composables/useGlobalContentSearch";
+import type { GlobalSearchItem } from "~/composables/global-content-search";
 
 const props = defineProps<{
   navigation?: ContentNavigationItem[];

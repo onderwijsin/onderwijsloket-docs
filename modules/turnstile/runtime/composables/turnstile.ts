@@ -70,16 +70,16 @@ export function useTurnstile() {
 
   function showPendingHint(): void {
     toast.add({
-      title: "Even wachten…",
-      description: "Bezig met beveiligingscontrole",
+      title: "Hold tight…",
+      description: "Performing security check",
       color: "warning"
     });
   }
 
   function showMissingTokenErrorHint(): void {
     toast.add({
-      title: "Beveilivingscontrole mislukt",
-      description: "Ververs de pagina en probeer het opnieuw",
+      title: "Security check failed",
+      description: "Refresh the page and try again",
       color: "error"
     });
   }

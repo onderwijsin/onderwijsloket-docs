@@ -45,7 +45,7 @@ Every generated record has a non-navigable Content entry and keeps the metadata 
 
 ## Command-palette search
 
-[`app/composables/useGlobalContentSearch.ts`](../app/composables/useGlobalContentSearch.ts) lazily
+[`app/composables/global-content-search.ts`](../app/composables/global-content-search.ts) lazily
 initializes separate FTS5 indexes for the current documentation collection and `api`. Documentation
 is always rendered first, followed by API operations and API models/metadata. API operations include
 a method badge and navigate to their Scalar deep link.
