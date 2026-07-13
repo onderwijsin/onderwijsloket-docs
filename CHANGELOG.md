@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/onderwijsin/onderwijsloket-docs/compare/v1.1.0...v1.1.1) (2026-07-13)
+
+
+### Bug Fixes
+
+* Possibly fix ogimage issue ([0782bba](https://github.com/onderwijsin/onderwijsloket-docs/commit/0782bba26aaa9b97fb892afabcd572933a0bc99e))
+
 # [1.1.0](https://github.com/onderwijsin/onderwijsloket-docs/compare/v1.0.0...v1.1.0) (2026-07-13)
 
 
