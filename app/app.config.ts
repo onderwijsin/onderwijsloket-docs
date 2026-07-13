@@ -104,6 +104,11 @@ export default defineAppConfig({
         center: "lg:col-span-8",
         right: "lg:col-span-2 order-first lg:order-last"
       }
+    },
+    footer: {
+      slots: {
+        root: "relative"
+      }
     }
   }
 });

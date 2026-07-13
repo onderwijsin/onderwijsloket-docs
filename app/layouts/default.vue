@@ -9,7 +9,7 @@
       size="md"
       :speed="25000"
     />
-    <UMain>
+    <UMain class="relative">
       <slot />
     </UMain>
   </div>

@@ -158,6 +158,19 @@ export default defineNuxtConfig({
     ]
   },
 
+  icon: {
+    serverBundle: {
+      collections: ["lucide", "simple-icons", "bxl", "vscode-icons"]
+    }
+  },
+
+  fonts: {
+    families: [
+      { name: "Figtree", weights: [400, 700], global: true },
+      { name: "JetBrains Mono", weights: [400, 700], global: true }
+    ]
+  },
+
   turnstile: {
     siteKey: turnstileSiteKey,
     secretKey: turnstileSecretKey

@@ -68,12 +68,11 @@ export default defineContentConfig({
       source: "index.yml",
       type: "page",
       schema: z.object({
-        seo: z
-          .object({
-            title: z.string().optional(),
-            description: z.string().optional()
-          })
-          .optional(),
+        seo: z.object({
+          title: z.string(),
+          description: z.string(),
+          ogImage: z.string()
+        }),
         hero: z.object({
           headline: z.string().optional(),
           title: z.string().nonempty(),

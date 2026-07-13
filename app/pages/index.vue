@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import type { ButtonProps } from "@nuxt/ui";
-
 const { data } = await useAsyncData("index", () => queryCollection("landing").first());
 if (!data.value) {
   throw createError({
@@ -11,6 +9,12 @@ if (!data.value) {
 }
 
 const page = data.value!;
+
+useSeo({
+  title: page.seo?.title,
+  description: page.seo?.description,
+  ogImage: page.seo?.ogImage
+});
 </script>
 
 <template>
@@ -36,7 +40,7 @@ const page = data.value!;
         headline:
           'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
-        description: 'max-w-2xl mx-auto text-dimmed'
+        description: 'max-w-3xl mx-auto text-dimmed'
       }"
     >
       <template v-if="page.features.headline" #headline>
