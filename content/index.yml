@@ -1,3 +1,7 @@
+seo: 
+  title: Onderwijsloket API documentation
+  description: Build with trusted information from Onderwijsloket and integrate it into your content, search, and media experiences.
+  ogImage: https://res.cloudinary.com/onderwijsin/image/upload/v1736344100/brand/meta_image_onderwijsloket_nnla1c.png
 hero: 
   headline: 
   title: Build with the <span class="text-primary">Onderwijsloket</span> API
@@ -18,7 +22,7 @@ hero:
 features:
   headline: Composable by design
   title: "Integrate your way."
-  description: Choose the parts of our API platform that actually fit your product, and ignore the rest.
+  description: Choose the parts of our API platform that actually fit your product, and ignore everything else.
   items:
     - icon: i-lucide-layers
       title: Granular Data Fetching
@@ -39,7 +43,7 @@ features:
       title: AI Ready
       description: Integrate Onderwijsloket documentation in your preferred coding agent with our MCP server.
 cta:
-  title: "Ready to build\n something amazing?"
+  title: "Start building\n for free"
   description: Join us in making trusted information about working in Dutch education available to everyone. Together, we can turn an open, shared mission into useful products and better public access.
   links:
     - label: 'Start building'
@@ -53,7 +57,3 @@ cta:
       size: 'xl'
       variant: 'outline'
       icon: 'i-lucide-code-xml'
-seo:
-  title: Onderwijsloket API documentation
-  description: Build reliable integrations with Onderwijsloket content, search, media, and guidance services.
-
