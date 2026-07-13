@@ -6,14 +6,14 @@ seo:
 
 ::u-page-hero
 #title
-Build with the Onderwijsloket API
+Build with the <span class="text-primary">Onderwijsloket</span> API
 
 #description
-Integrate trusted information about working in Dutch education into your product. Use our Directus API for content, Algolia for search, and Cloudinary for media.
+Integrate trusted information about working in Dutch education into your product. Use our Directus API for content, Algolia for instant search, and Cloudinary for media.
 
 #links
-  :::u-button{color="neutral" size="xl" to="/getting-started" trailing-icon="i-lucide-arrow-right"}
-  Start integrating
+  :::u-button{color="primary" size="xl" to="/getting-started" trailing-icon="i-lucide-arrow-right"}
+  Start building
   :::
 
   :::u-button{color="neutral" size="xl" to="/api-reference" variant="outline" icon="i-lucide-code-xml"}

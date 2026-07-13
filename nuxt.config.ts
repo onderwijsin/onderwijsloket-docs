@@ -70,7 +70,10 @@ export default defineNuxtConfig({
         "@vue/devtools-core",
         "@vue/devtools-kit",
         "zod",
-        "@unhead/schema-org/vue"
+        "@unhead/schema-org/vue",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })]
