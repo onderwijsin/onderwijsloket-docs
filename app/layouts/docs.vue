@@ -10,7 +10,7 @@
         </template>
         <slot />
       </UPage>
-      <InlineNewsletterSignup class="my-6" />
+      <InlineNewsletterSignup class="mt-12 mb-6" />
     </UContainer>
   </UMain>
 </template>
