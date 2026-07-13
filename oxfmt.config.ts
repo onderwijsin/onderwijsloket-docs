@@ -12,7 +12,6 @@ export default defineConfig({
     "nuxt/.nuxt",
     ".output",
     "node_modules",
-    "content/",
     ".agent/skills",
     ".agents/skills",
     ".agents/**",

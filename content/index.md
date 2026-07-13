@@ -1,123 +1,85 @@
 ---
 seo:
-  title: Write beautiful docs with Markdown
-  description: Ship fast, flexible, and SEO-optimized documentation with beautiful
-    design out of the box. Docus brings together the best of the Nuxt ecosystem.
-    Powered by Nuxt UI.
+  title: Onderwijsloket API documentation
+  description: Build reliable integrations with Onderwijsloket content, search, media, and guidance services.
 ---
 
 ::u-page-hero
 #title
-Write beautiful docs with Markdown
+Build with the Onderwijsloket API
 
 #description
-Ship fast, flexible, and SEO-optimized documentation with beautiful design out of the box.
-
-Docus brings the best of the Nuxt ecosystem into one CLI.
+Integrate trusted information about working in Dutch education into your product. Use our Directus API for content, Algolia for search, and Cloudinary for media.
 
 #links
-  :::u-button
-  ---
-  color: neutral
-  size: xl
-  to: /getting-started
-  trailing-icon: i-lucide-arrow-right
-  ---
-  Get started
-  :::
+:::u-button{color="neutral" size="xl" to="/getting-started" trailing-icon="i-lucide-arrow-right"}
+Start integrating
+:::
 
-  :::u-button
-  ---
-  color: neutral
-  icon: lucide:code-xml
-  size: xl
-  to: /api-reference
-  variant: outline
-  ---
-  API Reference
-  :::
+:::u-button{color="neutral" size="xl" to="/api-reference" variant="outline" icon="i-lucide-code-xml"}
+Explore the API
+:::
 ::
 
 ::u-page-section
 #title
-Shipped with many features
+Choose the integration that fits your product
 
 #features
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://nuxt.com
-  ---
-  #title
-  Built with [Nuxt 4]{.text-primary}
-  
-  #description
-  Optimized by the most famous Vue framework. Docus gives you everything you need to build fast, performant, and SEO-friendly websites.
-  :::
+:::u-page-feature{icon="i-simple-icons-directus" to="/directus/your-first-request"}
+#title
+Retrieve structured content
 
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://ui.nuxt.com/
-  ---
-  #title
-  Powered by [Nuxt UI]{.text-primary}
-  
-  #description
-  Beautiful out of the box, minimal by design but highly customizable. Docus leverages Nuxt UI to give you the best docs writing experience with zero boilerplate, just focus on your content.
-  :::
+#description
+Query articles, FAQs, programmes, routes, and their relationships through the Directus API.
+:::
 
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://content.nuxt.com
-  ---
-  #title
-  Enhanced Markdown syntax by [Nuxt Content]{.text-primary}
-  
-  #description
-  The only thing you need to take care about is writing your content. Write your pages in Markdown and extend with MDC syntax to embed Nuxt UI or custom Vue components. Structure, routing, and rendering are handled for you.
-  :::
+:::u-page-feature{icon="i-simple-icons-algolia" to="/search/setting-up-a-client"}
+#title
+Build fast search experiences
 
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://nuxt.com/docs/guide/directory-structure/app-config
-  ---
-  #title
-  Customize with [Nuxt App Config]{.text-primary}
-  
-  #description
-  Update colors, social links, header logos and component styles globally using the `app.config.ts`, no direct code modifications required.
-  :::
+#description
+Search curated indexes, add filters and facets, or implement geo-search for education programmes.
+:::
 
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://content.nuxt.com/studio
-  ---
-  #title
-  Edit in production with [Nuxt Studio]{.text-primary}
-  
-  #description
-  Edit your content in production with zero Markdown knowledge required. Let your non technical colleagues collaborate on the documentation and integrate Vue components without code skills.
-  :::
+:::u-page-feature{icon="i-lucide-image" to="/misc/cloudinary"}
+#title
+Deliver optimised media
 
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://ui.nuxt.com/components/content-search
-  ---
-  #title
-  Built-in navigation and [full-text search]{.text-primary}
-  
-  #description
-  Only focus on ordering your content, Docus handles the search modal and auto-generates the side navigation for you.
-  :::
+#description
+Turn Directus asset IDs into public Cloudinary URLs, with the transformations your interface needs.
+:::
+::
+
+::u-page-section
+#title
+Work from reliable building blocks
+
+#description
+Start with a token, make a small request, then use the data model and copy-paste examples to grow your integration safely.
+
+#features
+:::u-page-feature{icon="i-lucide-key-round" to="/directus/authentication"}
+#title
+Authenticate safely
+
+#description
+Keep a static token on the server and send it in an Authorization header.
+:::
+
+:::u-page-feature{icon="i-lucide-database" to="/data-model/data-model-overview"}
+#title
+Understand the data
+
+#description
+Learn which collections hold content, how their relationships work, and which fields are searchable.
+:::
+
+:::u-page-feature{icon="i-lucide-book-open-check" to="/misc/content-documents"}
+#title
+Render rich documents
+
+#description
+Process Tiptap JSON and resolve its relational custom nodes in your own frontend.
+:::
 ::
