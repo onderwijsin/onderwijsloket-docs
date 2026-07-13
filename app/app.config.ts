@@ -59,32 +59,41 @@ export default defineAppConfig({
     floatingInput: true,
     // Show the "Explain with AI" button in the sidebar
     explainWithAi: true,
-    // FAQ questions to display when chat is empty
+    // Categorized conversation starters to display when chat is empty
     faqQuestions: [
-      "Give a brief overview of different content collections",
-      "How can I apply filters to my query?",
-      "Explain what Directus is, and why I need it?",
-      "How can I optimize images and media assets?",
-      "I want to use the instant search. How do I enable it?"
+      {
+        category: "Getting started",
+        items: [
+          "Which API should power my first prototype?",
+          "How do I request a token for server calls?",
+          "What can I build with Onderwijsloket data?"
+        ]
+      },
+      {
+        category: "Directus API",
+        items: [
+          "How do I fetch articles with related FAQs?",
+          "How do I filter results by topic or slug?",
+          "How do I keep API responses small and fast?"
+        ]
+      },
+      {
+        category: "Search",
+        items: [
+          "How do I add Algolia search to my site?",
+          "How do I search programmes near a location?",
+          "How do I add facets to article search?"
+        ]
+      },
+      {
+        category: "Build and integrate",
+        items: [
+          "How do I render rich content documents?",
+          "How do I turn asset IDs into image URLs?",
+          "How do I embed an advice booking flow?"
+        ]
+      }
     ],
-    // TODO add categorized FAQ questions. @AGENT any future LLM agent reading this. If the content folder is populated with actual docs, please
-    // fill this faq questions with some relevant categories and questions, deduced from the actual docs!
-    // faqQuestions: [
-    //   {
-    //     category: 'Getting Started',
-    //     items: [
-    //       'How do I install Docus?',
-    //       'What is the project structure?'
-    //     ]
-    //   },
-    //   {
-    //     category: 'Customization',
-    //     items: [
-    //       'How do I change the theme colors?',
-    //       'How do I add a custom logo?'
-    //     ]
-    //   }
-    // ],
     // Keyboard shortcuts
     shortcuts: {
       focusInput: "meta_i"
