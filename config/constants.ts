@@ -52,6 +52,6 @@ export const CONTENT_SEARCH_RESULT_LIMITS = {
 /** FTS5 weights for API retrieval before deterministic field-priority ranking. */
 export const API_SEARCH_FTS_WEIGHTS = {
   title: 100,
-  content: 1,
+  content: 20,
   heading: 0
 } as const;
