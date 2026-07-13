@@ -6,6 +6,15 @@ import { resolveEnvironment, resolveTurnstile } from "./config/helpers";
 import { app } from "./config/head";
 import identity, { siteDescription, siteTitle } from "./config/identity";
 import { ofetch } from "ofetch";
+import { SCALAR_BASE_PATH } from "./config/constants";
+import { OPENAPI_DOCUMENT_SLUG } from "./config/openapi";
+import { getOpenApiScalarUrl } from "./lib/openapi";
+import {
+  SITE_MCP_BROWSER_REDIRECT,
+  SITE_MCP_DESCRIPTION,
+  SITE_MCP_NAME,
+  SITE_MCP_ROUTE
+} from "./config/siteMcp";
 
 // Runtime environments
 const { environment, isDebug, isProd, isPreview, isDev, isTest } = resolveEnvironment(ENV.MODE);
@@ -115,7 +124,11 @@ export default defineNuxtConfig({
   },
 
   mcp: {
-    version
+    version,
+    route: SITE_MCP_ROUTE,
+    browserRedirect: SITE_MCP_BROWSER_REDIRECT,
+    name: SITE_MCP_NAME,
+    description: SITE_MCP_DESCRIPTION
   },
 
   schemaOrg: {
@@ -168,7 +181,7 @@ export default defineNuxtConfig({
     searchHotKey: undefined,
     showSidebar: true,
     pathRouting: {
-      basePath: "/api-reference"
+      basePath: SCALAR_BASE_PATH
     },
     hideSearch: true,
     hideDarkModeToggle: true,
@@ -179,7 +192,8 @@ export default defineNuxtConfig({
       disabled: true
     },
     hideClientButton: true,
-    url: "https://registry.scalar.com/@onderwijsin/apis/dynamic-onderwijsloket-api-specification@latest"
+    slug: OPENAPI_DOCUMENT_SLUG,
+    url: getOpenApiScalarUrl()
   },
 
   healthcheck: {
@@ -260,6 +274,9 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    [SCALAR_BASE_PATH]: {
+      ssr: false
+    },
     "/guides": {
       redirect: "/"
     },

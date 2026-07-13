@@ -1,17 +1,20 @@
 <script lang="ts" setup>
-const route = useRoute();
+import { SCALAR_BASE_PATH } from "@config/constants";
 
-const isExplorer = computed(() => route.path.startsWith("/api-reference"));
+const { scalar } = useAppConfig();
+const route = useRoute();
+const isExplorer = computed(() => route.path.startsWith(SCALAR_BASE_PATH));
 </script>
 
 <template>
   <UButton
-    :to="isExplorer ? '/getting-started/introduction' : '/api-reference'"
+    v-if="scalar.enabled"
+    :to="isExplorer ? '/getting-started/introduction' : SCALAR_BASE_PATH"
     color="primary"
     size="sm"
     variant="soft"
     class="hidden lg:inline-flex"
-    :icon="isExplorer ? 'lucide:book-open' : 'lucide:code-xml'"
+    :icon="isExplorer ? getIcon('docs') : getIcon('api_explorer')"
   >
     {{ isExplorer ? "Documentation" : "API Explorer" }}
   </UButton>

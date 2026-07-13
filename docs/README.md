@@ -5,6 +5,8 @@ stable patterns worth documenting.
 
 - [Overview](./overview.md)
 - [Architecture](./architecture.md)
+- [OpenAPI parsing and search](./openapi.md)
+- [Scalar API reference](./scalar.md)
 - [Development](./development.md)
 - [Runtime and environment](./runtime.md)
 - [Modules](./modules.md)

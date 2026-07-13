@@ -10,11 +10,12 @@
 
 ## Public documentation
 
-- Write pages in `content/` for a public developer audience; do not treat them as internal project
-  notes.
-- Use [Nuxt UI Prose components](https://ui.nuxt.com/docs/typography) with their documented MDC
-  syntax whenever they improve the presentation of public-facing documentation.
-- Use the `create-docs` and `edit-article` skills when creating or revising public-facing
-  documentation. Keep their output focused on readers of the published docs.
+`content/docs/` contains public, user-facing developer documentation, not internal project notes. Apply the following rules whenever creating, editing, or formatting articles in that directory:
+
+1. Use the `create-docs` and `edit-article` skills when creating or revising documentation, and keep the output focused on readers of the published docs.
+2. Always consult the [Nuxt UI skill](../.agents/skills/nuxt-ui/SKILL.md), the [Nuxt Content MCP](https://content.nuxt.com/mcp), and the [Remark MDC syntax reference](https://remark-mdc.nuxt.space/#syntax) before writing or formatting an article.
+3. Use the Nuxt UI and Nuxt Content references to select and validate MDC syntax, component props, slots, and nesting.
+4. Use [Nuxt UI Prose components](https://ui.nuxt.com/docs/typography) and other Nuxt UI components through their documented MDC syntax whenever they improve the reader's understanding, presentation, or navigation. Prefer the component that best fits the content rather than limiting articles to plain Markdown.
+5. Preserve required frontmatter and the established content structure unless the requested change requires otherwise.
 
 The repository root [AGENTS.md](../AGENTS.md) contains the operational rules for coding agents.
