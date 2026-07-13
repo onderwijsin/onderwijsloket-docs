@@ -113,4 +113,5 @@ Then continue.
 - Do not turn MDC component YAML props into page frontmatter.
 - Keep fenced code blocks intact; their backticks are unrelated to MDC delimiters.
 - Confirm every `#slot` belongs to the nearest open block component.
+- In package-manager code groups, list tabs in this order: `pnpm`, `npm`, `yarn`, then `bun`.
 - Check generated HTML or run the Nuxt build after changes.
