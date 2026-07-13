@@ -1,3 +1,26 @@
+# [1.1.0](https://github.com/onderwijsin/onderwijsloket-docs/compare/v1.0.0...v1.1.0) (2026-07-13)
+
+
+### Bug Fixes
+
+* Build errors ([e2acd1d](https://github.com/onderwijsin/onderwijsloket-docs/commit/e2acd1dbc5b167a45d7a786431ec09e8c32473e3))
+* Move content to docs dir ([049b00a](https://github.com/onderwijsin/onderwijsloket-docs/commit/049b00ad187c665ffb8be961110058b52a668362))
+* Scalar theme, mcp basics ([c7a3375](https://github.com/onderwijsin/onderwijsloket-docs/commit/c7a3375bf00e5466c0e637b9f3d61f6f1b5dcbab))
+
+
+### Features
+
+* Add agent docs ([67092e1](https://github.com/onderwijsin/onderwijsloket-docs/commit/67092e1dad7d1f1c6c0a93baa068ad5a11978d8d))
+* Add custom collection config and search component ([66a7f0d](https://github.com/onderwijsin/onderwijsloket-docs/commit/66a7f0d0f22e877cfebffba8f885ba3b411f151d))
+* Add docs from scalar ([3e22f32](https://github.com/onderwijsin/onderwijsloket-docs/commit/3e22f32ac116ad3d2e42b6c94fd71ed1953fade1))
+* Add mailchimp signup ([0ad2824](https://github.com/onderwijsin/onderwijsloket-docs/commit/0ad28246a1f24e8b9667ce2070cd8b9fadf414f9))
+* Add pattern bg to landing ([c21e169](https://github.com/onderwijsin/onderwijsloket-docs/commit/c21e1697cdc323128abe369a39f1369fef74a161))
+* Expand mcp server and add md middleware ([c873e9d](https://github.com/onderwijsin/onderwijsloket-docs/commit/c873e9d545dac2420fd1b18e5bf9ed0703653551))
+* Finish api and search pipeline ([ecf4804](https://github.com/onderwijsin/onderwijsloket-docs/commit/ecf48047def1d93459a5473e46cd7c58c3741472))
+* Finish landing page ([49621c6](https://github.com/onderwijsin/onderwijsloket-docs/commit/49621c61fae884a6d2423265d6da61bb5f3114fe))
+* Refactor docs for nuxt context/ ([46f43f8](https://github.com/onderwijsin/onderwijsloket-docs/commit/46f43f899b5455efd6a215b770b337ceb63fbccf))
+* Setup api pipeline ([29f6930](https://github.com/onderwijsin/onderwijsloket-docs/commit/29f6930856e142d946f2faf84e73141506078834))
+
 # 1.0.0 (2026-07-12)
 
 
