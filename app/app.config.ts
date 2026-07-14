@@ -1,34 +1,14 @@
-import { siteTitle, siteDescription } from "@config/identity";
-import { getIcon } from "~~/shared/utils/icons";
+import { APP_IDENTITY } from "~~/constants";
+import { getIcon } from "#layers/docus-plus/shared/utils/icons";
 
 export default defineAppConfig({
   statusPage: "https://kuma.onderwijsin.nl/status/onderwijsloket",
-  publisher: {
-    name: "Stichting Onderwijs in",
-    url: "https://onderwijsin.nl",
-    contact: "https://onderwijsin.nl/contact"
-  },
-
-  scalar: {
-    enabled: true
-  },
 
   seo: {
-    title: siteTitle,
-    description: siteDescription
+    title: APP_IDENTITY.siteTitle,
+    description: APP_IDENTITY.siteDescription
   },
-
-  search: {
-    fts: true
-  },
-  socials: {
-    github: "https://github.com/onderwijsin"
-  },
-  // @ts-expect-error upstream type mismatch
-  github: false,
   toc: {
-    // Rename the title of the table of contents
-    title: "On this page",
     // Add a bottom section to the table of contents
     bottom: {
       title: "Further Reading",
@@ -44,21 +24,11 @@ export default defineAppConfig({
           label: "View Source",
           to: "https://github.com/onderwijsin/onderwijsloket-docs",
           target: "_blank"
-        },
-        {
-          icon: getIcon("mail"),
-          label: "Newsletter",
-          to: "https://onderwijsin.nl/nieuwsbrief",
-          target: "_blank"
         }
       ]
     }
   },
   assistant: {
-    // Show the floating input on documentation pages
-    floatingInput: true,
-    // Show the "Explain with AI" button in the sidebar
-    explainWithAi: true,
     // Categorized conversation starters to display when chat is empty
     faqQuestions: [
       {
@@ -93,11 +63,7 @@ export default defineAppConfig({
           "How do I embed an advice booking flow?"
         ]
       }
-    ],
-    // Keyboard shortcuts
-    shortcuts: {
-      focusInput: "meta_i"
-    }
+    ]
   },
 
   ui: {
@@ -105,19 +71,6 @@ export default defineAppConfig({
       primary: "pink",
       secondary: "purple",
       neutral: "zinc"
-    },
-    page: {
-      slots: {
-        root: "flex flex-col lg:grid lg:grid-cols-10 lg:gap-10",
-        left: "lg:col-span-2",
-        center: "lg:col-span-8",
-        right: "lg:col-span-2 order-first lg:order-last"
-      }
-    },
-    footer: {
-      slots: {
-        root: "relative"
-      }
     }
   }
 });
