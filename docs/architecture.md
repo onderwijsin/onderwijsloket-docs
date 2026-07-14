@@ -1,23 +1,26 @@
-# Architecture
+# Architecture and ownership
 
-The application is a Docus layer extended by Nuxt configuration in `nuxt.config.ts`.
+The application extends `@onderwijsin/docus-plus` from `nuxt.config.ts` and adds a thin
+Onderwijsloket-specific configuration layer.
 
-Important directories:
+## Ownership split
 
-- `content/` — Markdown and MDC documentation content.
-- `app/` — application-level Vue code and styling.
-- `server/` — server routes, utilities, and types.
-- `modules/` — local Nuxt modules.
-- `config/` — application configuration helpers and constants.
-- `schema/` — request and domain schemas.
-- `envs/` — Varlock environment schemas and local profiles.
-- `public/` — static assets.
+| Area                                                                               | Owner                                                   |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Nuxt, Docus, and Nuxt Content integration                                          | [docus-plus](https://github.com/onderwijsin/docus-plus) |
+| Shared layouts, UI, navigation, search, assistant, MCP, and API reference plumbing | docus-plus                                              |
+| Site identity, colors, logo, assistant questions, and table-of-contents links      | This app                                                |
+| Landing page and published articles                                                | This app, under `content/`                              |
+| Environment profiles and deployment configuration                                  | This app                                                |
 
-## OpenAPI search index
+Keep changes in the owning repository. If a feature should be reusable by multiple documentation
+sites, implement it in docus-plus and consume a released version here. If it describes
+Onderwijsloket data, services, or editorial policy, keep it in this repository's content.
 
-The Scalar API reference and searchable API index share one configured source. The build-time
-search pipeline is documented in [OpenAPI parsing and search](./openapi.md); Scalar UI integration
-is documented in [Scalar API reference](./scalar.md).
+## Application-specific files
 
-Keep reusable behavior in the existing directory that owns it. Check nearby code before adding a
-new pattern.
+- `nuxt.config.ts` extends the layer and sets site-specific metadata and redirects.
+- `app/app.config.ts` configures branding, assistant starters, and extra links.
+- `app/app.css` imports the layer stylesheet and provides this site's styling.
+- `app/components/` contains app-level component overrides.
+- `content/` contains the published landing-page data and documentation articles.

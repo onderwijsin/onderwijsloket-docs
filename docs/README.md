@@ -1,17 +1,17 @@
 # Project documentation
 
-This directory contains short notes about the repository. Add detail here when the codebase gains
-stable patterns worth documenting.
+This directory documents the consuming application. Shared platform behavior is documented in the
+[docus-plus repository](https://github.com/onderwijsin/docus-plus); avoid duplicating its
+implementation details here.
 
 - [Overview](./overview.md)
-- [Architecture](./architecture.md)
-- [OpenAPI parsing and search](./openapi.md)
-- [Scalar API reference](./scalar.md)
+- [Architecture and ownership](./architecture.md)
 - [Development](./development.md)
-- [Runtime and environment](./runtime.md)
-- [Modules](./modules.md)
+- [Runtime and deployment](./runtime.md)
+- [Writing content articles](./writing-content-articles.md)
 - [Conventions](./conventions.md)
 - [Agent contract](./agent-contract.md)
 
-Deployment details are intentionally not documented yet. Confirm the current Coolify setup before
-adding them.
+The API, search, Scalar, MCP, assistant, and reusable module implementations belong to
+[docus-plus](https://github.com/onderwijsin/docus-plus). The public articles in `content/docs/`
+remain the source for Onderwijsloket-specific integration guidance.

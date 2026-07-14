@@ -1,10 +1,15 @@
 # Overview
 
-This repository contains the Onderwijsloket documentation site.
+This repository contains the Onderwijsloket content site. It consumes the reusable
+[`@onderwijsin/docus-plus`](https://github.com/onderwijsin/docus-plus) Nuxt layer and supplies the
+site-specific pieces:
 
-It is a Docus application built on Nuxt and Nuxt Content. The documentation pages live in
-`content/`; application code, server routes, configuration, schemas, and local Nuxt modules live in
-their corresponding top-level directories.
+- published content in `content/`;
+- Onderwijsloket identity, branding, and UI overrides in `app/` and `constants.ts`;
+- small route/configuration overrides in `nuxt.config.ts`;
+- environment profiles in `envs/`; and
+- static assets in `public/`.
 
-The project is deployed through Coolify. Deployment-specific details should be added after they are
-confirmed in the current setup.
+Nuxt, Docus, Nuxt Content, the shared documentation UI, search, assistant, MCP, API reference
+integration, and reusable runtime modules are layer responsibilities. Consult the
+[docus-plus README](https://github.com/onderwijsin/docus-plus) when changing those areas.

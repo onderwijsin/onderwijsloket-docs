@@ -1,14 +1,13 @@
 # Environment management
 
-Environment values use Varlock. The schema in `envs/.env.schema` imports the smaller schemas in
-`envs/schemas/` and selects a profile through `MODE`/`APP_ENV`.
+Environment management is app-specific and uses Varlock with Proton Pass.
 
-For local work, use the tracked environment profiles and run:
+- `envs/.env.schema` defines the local environment contract.
+- `envs/.env.development`, `envs/.env.preview`, and `envs/.env.production` provide tracked profiles.
+- `envs/schemas/` contains the imported schema sections.
+- `corepack pnpm env:check` validates the active profile.
+- `corepack pnpm env:typegen` regenerates environment types.
 
-```bash
-corepack pnpm env:check
-corepack pnpm env:typegen
-```
-
-Secrets and deployment-specific values are not described here until the project’s current
-Coolify and Proton Pass setup has been verified.
+Keep secrets out of the repository. For the runtime and Coolify deployment path, see
+[Runtime and deployment](./runtime.md). Shared layer environment options are documented in the
+[docus-plus repository](https://github.com/onderwijsin/docus-plus).

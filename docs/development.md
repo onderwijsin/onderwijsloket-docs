@@ -1,31 +1,32 @@
 # Development
 
-The project uses Node.js and the package manager pinned in `package.json`: pnpm `11.11.0`.
+This repository is the consuming application for the docus-plus layer. Use the layer repository
+for shared platform development; use this repository for Onderwijsloket content and configuration.
 
-Common commands:
+## Start locally
 
 ```bash
+corepack pnpm install
+pass-cli login
 corepack pnpm dev
-corepack pnpm build
-corepack pnpm start
-corepack pnpm typecheck
-corepack pnpm env:check
 ```
 
-The pre-commit hook uses `lint-staged` to format and lint only staged files.
-Formatting and lint fixes are automatically re-staged, so they are included in
-the commit without staging unrelated working-tree changes. Husky remains
-responsible for installing the Git hooks and validating commit messages.
+Environment values are loaded through Varlock. See [Runtime and deployment](./runtime.md).
 
-The pre-commit formatter passes `--no-error-on-unmatched-pattern` to `oxfmt`.
-This lets lint-staged pass all matched staged paths while allowing files excluded
-by `oxfmt.config.ts` ignore patterns to be skipped without failing the commit.
+## Verify changes
 
-Run `corepack pnpm dev` to start the local Docus site. Environment values are loaded through
-Varlock; see [Runtime and environment](./runtime.md).
+Run the checks relevant to the files changed:
 
-## OpenAPI source
+```bash
+corepack pnpm typecheck
+corepack pnpm fmt:check
+corepack pnpm lint
+corepack pnpm build
+```
 
-Configure the single API source in `config/openapi.ts` and run `corepack pnpm build` after changing
-it. See [OpenAPI API reference and search](./openapi.md) for local and remote source formats,
-build-failure policy, and troubleshooting steps.
+When changing published articles, also inspect the rendered page locally. The content authoring
+rules and required skills are in [Writing content articles](./writing-content-articles.md).
+
+When changing the layer dependency or shared platform behavior, make the change in
+[docus-plus](https://github.com/onderwijsin/docus-plus) and update this app's pinned version only
+as part of the release workflow.
