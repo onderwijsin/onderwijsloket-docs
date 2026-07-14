@@ -4,7 +4,7 @@ seo:
   ogImage: https://res.cloudinary.com/onderwijsin/image/upload/v1736344100/brand/meta_image_onderwijsloket_nnla1c.png
 hero: 
   headline: 
-  title: Build with the <span class="text-primary">Onderwijsloket</span> API
+  title: Build with the <span class="gradient-text">Onderwijsloket</span> API
   title_as_html: true
   description: Integrate trusted information about working in Dutch education into your product. Use our Directus API for content, Algolia for instant search, and Cloudinary for media.
   links: 
