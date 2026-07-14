@@ -1,6 +1,6 @@
 import { TURNSTILE_ACTIONS } from "@constants";
 import { mailchimpSubscriberSchema } from "@schema/mailchimp/subscribe";
-import { assertTurnstileToken } from "~~/modules/turnstile/runtime/server/utils/turnstile";
+import { assertTurnstileToken } from "~~/modules/healthcheck/turnstile/runtime/server/utils/turnstile";
 import { useApiResponse } from "~~/server/utils/api";
 import { subscribeToMailchimp } from "~~/server/utils/mailchimp/subscribe";
 import { z } from "zod";
