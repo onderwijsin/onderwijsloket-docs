@@ -15,6 +15,13 @@ export default defineNuxtConfig({
     plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })]
   },
 
+  runtimeConfig: {
+    directus: {
+      baseUrl: process.env.DIRECTUS_URL,
+      publicToken: process.env.DIRECTUS_PUBLIC_TOKEN
+    }
+  },
+
   site: {
     name: APP_IDENTITY.siteTitle,
     description: APP_IDENTITY.siteDescription
