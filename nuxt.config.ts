@@ -41,7 +41,7 @@ export default defineNuxtConfig({
       redirect: "/**"
     },
     "/guides/getting-started": {
-      redirect: "/getting-started/introduction"
+      redirect: "/getting-started"
     }
   }
 });
