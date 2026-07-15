@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/onderwijsin/onderwijsloket-docs/compare/v1.2.0...v1.3.0) (2026-07-15)
+
+
+### Features
+
+* Add directus proxy route ([3da3299](https://github.com/onderwijsin/onderwijsloket-docs/commit/3da32999d490cb611e34a02f4eecc1296ca25cf7))
+* Upgrade docus plus ([a0411d2](https://github.com/onderwijsin/onderwijsloket-docs/commit/a0411d28383cdad37e5e8f62a9914cc41b87357e))
+
 # [1.2.0](https://github.com/onderwijsin/onderwijsloket-docs/compare/v1.1.1...v1.2.0) (2026-07-15)
 
 
