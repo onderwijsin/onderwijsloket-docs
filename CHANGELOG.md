@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/onderwijsin/onderwijsloket-docs/compare/v1.1.1...v1.2.0) (2026-07-15)
+
+
+### Features
+
+* Upgrade docus-plus and add custom og image ([2146223](https://github.com/onderwijsin/onderwijsloket-docs/commit/21462232673cb7ab1a6ee149df86c60acd06251f))
+
 ## [1.1.1](https://github.com/onderwijsin/onderwijsloket-docs/compare/v1.1.0...v1.1.1) (2026-07-13)
 
 
