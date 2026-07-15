@@ -6,7 +6,7 @@ hero:
   headline: 
   title: Build with the <span class="gradient-text">Onderwijsloket</span> API
   title_as_html: true
-  description: Integrate trusted information about working in Dutch education into your product. Use our Directus API for content, Algolia for instant search, and Cloudinary for media.
+  description: Integrate trusted information about working in Dutch education into your product. Use our API for granular data fetching, instant search, and optimized media distribution.
   links: 
     - label: 'Start building'
       to: '/getting-started'
