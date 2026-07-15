@@ -37,6 +37,7 @@
     "@semantic-release/release-notes-generator": "catalog:",
     "husky": "catalog:",
     "lint-staged": "catalog:",
+    "nuxtseo-layer-devtools": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "prettier-plugin-mdc": "catalog:",

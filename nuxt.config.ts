@@ -2,7 +2,6 @@ import { varlockVitePlugin } from "@varlock/vite-integration";
 import { APP_IDENTITY } from "./constants";
 
 export default defineNuxtConfig({
-  // extends: [["github:onderwijsin/docus-plus#v1.0.1", { install: true }]],
   extends: ["@onderwijsin/docus-plus"],
 
   components: [
