@@ -13,8 +13,8 @@ catalogs:
       specifier: 21.2.0
       version: 21.2.0
     '@onderwijsin/docus-plus':
-      specifier: 1.3.0
-      version: 1.3.0
+      specifier: 1.3.1
+      version: 1.3.1
     '@semantic-release/changelog':
       specifier: 6.0.3
       version: 6.0.3
@@ -79,7 +79,7 @@ importers:
     dependencies:
       '@onderwijsin/docus-plus':
         specifier: 'catalog:'
-        version: 1.3.0(de5d6d10042ad0abb7312d23a6952593)
+        version: 1.3.1(de5d6d10042ad0abb7312d23a6952593)
       '@varlock/proton-pass-plugin':
         specifier: 'catalog:'
         version: 2.0.0(varlock@1.10.0)
@@ -1856,8 +1856,8 @@ packages:
   '@octokit/types@16.0.0':
     resolution: {integrity: sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==}
 
-  '@onderwijsin/docus-plus@1.3.0':
-    resolution: {integrity: sha512-sawKT/vrpa8J+xAExurlDaKJIh19B28GXdN/tXGJahVzpWnLAFZ83+OB+MOzn4DHUj0LVqPI5lkn8IcErJbiNA==}
+  '@onderwijsin/docus-plus@1.3.1':
+    resolution: {integrity: sha512-Y3xqwPAUdnKfDOg6cSuU6oF+DpftaCzXBDk0I8FdsCEWoI1y4AshmpexNnv1cvNECtHT4QIoN3uvI/caMbvlYQ==}
     peerDependencies:
       better-sqlite3: 12.x
       nuxt: 4.x
@@ -11452,7 +11452,7 @@ snapshots:
     dependencies:
       '@octokit/openapi-types': 27.0.0
 
-  '@onderwijsin/docus-plus@1.3.0(de5d6d10042ad0abb7312d23a6952593)':
+  '@onderwijsin/docus-plus@1.3.1(de5d6d10042ad0abb7312d23a6952593)':
     dependencies:
       '@ai-sdk/gateway': 4.0.19(zod@4.4.3)
       '@ai-sdk/mcp': 2.0.12(zod@4.4.3)
